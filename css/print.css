@@ -1,0 +1,7 @@
+@page{size:landscape;}
+.breadcrumb,nav{display:none;}
+nav+#body{
+	margin-left:0;
+	width:100%;
+}
+.table-responsive{overflow-x:initial;}

@@ -1,0 +1,13 @@
+$('#vertical_nav>ul>li').click(function(){
+	if($('#vertical_nav>ul>li>ul')){
+		if($(this).hasClass('active')){
+			$(this).find('ul').css('display','none');
+			$(this).removeClass('active');
+		}else{
+			$('#vertical_nav>ul>li').removeClass('active');
+			$('#vertical_nav>ul>li>ul').css('display','none');
+			$(this).addClass('active');
+			$(this).find('ul').css('display','block');
+		}
+	}
+});
