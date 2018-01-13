@@ -1,8 +1,8 @@
 <?php class page{	
 	public $slug;
 	public function __construct(){
-		global $app,$db,$user,$default_permissions;
-		if(get_dir()!='CRONS' && get_dir()!='api' && get_dir()!='ajax'){
+		global $core,$app,$db,$user,$default_permissions;
+		if(get_dir()!='CRONS' && get_dir()!='api' && get_dir()!='ajax' && get_dir()!='templates'){
 			$this->path=substr($_SERVER['SCRIPT_FILENAME'],strlen(ROOT));
 			$this->slug=basename($_SERVER['SCRIPT_NAME'],'.php');
 			$this->dir=get_dir();
@@ -28,7 +28,7 @@
 				}
 				$this->permissions=$this->all_permissions[$user->role_id];
 				if($this->permissions['view']==0){
-					$app->log_message(2,'Unauthorised access','User tried to access "'.$this->title.'"');
+					$core->log_message(2,'Unauthorised access','User tried to access "'.$this->title.'"');
 					header('Location: ./');
 					exit;
 				}
@@ -79,7 +79,7 @@
 						array_map('json_encode',$default_permissions)
 					)
 				);
-				$app->log_message(3,'Added new page','Automatically added "'.$title.'" page');
+				$core->log_message(3,'Added new page','Automatically added "'.$title.'" page');
 				$this->__FUNCTION__;
 			}
 		}

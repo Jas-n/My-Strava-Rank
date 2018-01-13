@@ -1,7 +1,7 @@
 <?php class users{
 	# Add User
 	public function add_user($data){
-		global $addresses,$app,$db,$user;
+		global $core,$app,$addresses,$db,$user;
 		$pass=random_text(PASSWORD_STRENGTH);
 		$newpassword=password_hash($pass,PASSWORD_BCRYPT);
 		if($data['address']){
@@ -42,7 +42,7 @@
 			)
 		);
 		if($user_id=$db->insert_id()){
-			$app->log_message(3,'New User','Added '.$first_name.' '.$last_name.' to users');
+			$core->log_message(3,'New User','Added '.$first_name.' '.$last_name.' to users');
 			return array(
 				'id'		=>$user_id,
 				'password'	=>$pass
@@ -52,7 +52,7 @@
 	}
 	# Create meta for user
 	public function delete_users($users){
-		global $app,$db;
+		global $core,$db;
 		if(!is_array($users)){
 			$users=array($users);
 		}
@@ -65,8 +65,8 @@
 			}
 			$db->query("DELETE FROM `users` WHERE `id` IN(".implode(',',$users).")");
 			$db->query("DELETE FROM `notification_users` WHERE `id`IN(".implode(',',$users).")");
-			$app->set_message('success','Successfully deleted '.$db->rows_updated().' users',$datas);
-			$app->log_message(3,'Deleted users','Deleted '.$db->rows_updated().' users');
+			$core->set_message('success','Successfully deleted '.$db->rows_updated().' users',$datas);
+			$core->log_message(3,'Deleted users','Deleted '.$db->rows_updated().' users');
 		}
 	}
 	public function get_avatar($user_id=NULL,$size=75){
@@ -269,7 +269,7 @@
 		}
 	}
 	public function reset_password($users){
-		global $app,$db,$user;
+		global $core,$db,$user;
 		if(!is_array($users)){
 			$users=array($users);
 		}
@@ -306,8 +306,8 @@
 				</table>"
 			);
 		}
-		$app->set_message('success','Successfully reset '.sizeof($users).' users\' passwords');
-		$app->log_message(3,'Reset password(s)','Reset '.sizeof($users).' users\' passwords');
+		$core->set_message('success','Successfully reset '.sizeof($users).' users\' passwords');
+		$core->log_message(3,'Reset password(s)','Reset '.sizeof($users).' users\' passwords');
 	}
 	public static function search($term){
 		global $db;
@@ -386,7 +386,7 @@
 		}
 	}
 	public function update_user(array $columns_values,$user_id=NULL){
-		global $addresses,$app,$db,$page;
+		global $core,$addresses,$db,$page;
 		if($user_id){
 			$user=$user_id;
 		}else{
@@ -437,7 +437,7 @@
 			$this->__construct($this->id);
 		}
 		if($page->title!='Login'){
-			$app->log_message(3,'Updated User','Updated '.$first_name.' '.$last_name);
+			$core->log_message(3,'Updated User','Updated '.$first_name.' '.$last_name);
 		}
 		return $result;
 	}

@@ -2,7 +2,7 @@
 	public $id;
 	# Construct
 	public function __construct($user_id=NULL,array $loaders=array()){
-		global $app,$can_access,$db;
+		global $core,$app,$can_access,$db;
 		if($user_id!=NULL){
 			$this->id=$user_id;
 		}elseif($_SESSION['user_id']){
@@ -18,7 +18,7 @@
 			unset($temp);
 		}
 		if($can_access && !$this->is_role($can_access)){
-			$app->log_message(2,'Unauthorised access',$this->full_name.' tried accessing '.get_dir().'/'.basename($_SERVER['PHP_SELF']).' without the required permissions.',$_GET);
+			$core->log_message(2,'Unauthorised access',$this->full_name.' tried accessing '.get_dir().'/'.basename($_SERVER['PHP_SELF']).' without the required permissions.',$_GET);
 			header('Location: ../');
 			exit;
 		}

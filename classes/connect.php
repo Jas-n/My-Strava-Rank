@@ -1,1 +1,0 @@
-<?php $host="localhost";$user="sonyfana_strava";$pass="03maS7YxlC6rA4Tm";$name="sonyfana_strava";

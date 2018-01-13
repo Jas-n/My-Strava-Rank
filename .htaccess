@@ -1,24 +1,6 @@
-# This HTACCESS
-ErrorDocument 403 /error.php
-ErrorDocument 404 /error.php
-ErrorDocument 405 /error.php
-ErrorDocument 408 /error.php
-ErrorDocument 500 /error.php
-ErrorDocument 502 /error.php
-ErrorDocument 504 /error.php
-
 RewriteEngine On
 RewriteBase /
 
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule	^users/([A-Za-z\-_]+)/?$				users/$1\.php		[NC,L]
-RewriteRule	^users/?$								users/index\.php	[NC,L]
-RewriteRule	^([A-Za-z\-_]+)/?$						$1\.php				[NC,L]
-
-RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule	^([A-Za-z\-_]+)/?$						page\.php?slug=$1	[NC,L]
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule	^location/([0-9]*)						location\.php?id=$1	[NC,L]
-RewriteRule	^([athlete|club]*)/([a-zA-Z0-9]+)/?$	$1\.php?id=$2		[NC,L]
+RewriteRule	^([A-Za-z\-_]+)/?$ index\.php?page=$1 [NC,L]

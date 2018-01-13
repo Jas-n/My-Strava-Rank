@@ -36,57 +36,69 @@
 	public function distance_like($miles){
 		if($miles<26.21875){
 			$max=false;
-			$to_the='the length of a marathon';
+			$to='marathon';
+			$to_text='the length of a marathon';
 			$distance=26.21875;
+		}elseif($miles<271){
+			$max=false;
+			$to='uk_width';
+			$to_text='the width of the UK';
+			$distance=271;
 		}elseif($miles<622){
 			$max=false;
-			$to_the='the height of the UK';
+			$to='uk_height';
+			$to_text='the height of the UK';
 			$distance=622;
 		}elseif($miles<1339){
 			$max=false;
-			$to_the='across Europe';
+			$to='europe';
+			$to_text='across Europe';
 			$distance=1339;
 		}elseif($miles<2511){
 			$max=false;
-			$to_the='across Australia';
+			$to='australia';
+			$to_text='across Australia';
 			$distance=2680;
 		}elseif($miles<2680){
 			$max=false;
-			$to_the='across North America';
+			$to='america';
+			$to_text='across North America';
 			$distance=2680;
-		}elseif($miles<2705){
-			$max=false;
-			$to_the='across South America';
-			$distance=2705;
 		}elseif($miles<4160){
 			$max=false;
-			$to_the='along the river nile';
+			$to='nile';
+			$to_text='along the river nile';
 			$distance=4160;
-			$max=false;
 		}elseif($miles<4355){
-			$to_the='across Africa';
-			$distance=4355;
 			$max=false;
+			$to='africa';
+			$to_text='across Africa';
+			$distance=4355;
 		}elseif($miles<5515){
 			$max=false;
-			$to_the='across Asia';
+			$to='asia';
+			$to_text='across Asia';
 			$distance=5515;
 		}elseif($miles<6786){
 			$max=false;
-			$to_the='around the moon';
+			$to='moon';
+			$to_text='around the moon';
 			$distance=6786;
 		}elseif($miles<9522){
 			$max=false;
-			$to_the='around Mercury';
+			$to='mercury';
+			$to_text='around Mercury';
 			$distance=9522;
 		}else{
 			$max=($miles>5515?true:false);
-			$to_the='around the world';
+			$to='world';
+			$to_text='around the world';
 			$distance=7917.5;
 		}
 		return array(
 			'max'		=>$max,
-			'to'		=>$to_the,
+			'to'		=>$to,
+			'to_text'	=>$to_text,
 			'times'		=>floor($miles/$distance),
 			'complete'	=>round(($miles/$distance-floor($miles/$distance))*100,2)
 		);

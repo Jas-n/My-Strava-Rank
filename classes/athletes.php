@@ -19,7 +19,9 @@
 			asort($athlete['ranks']);
 			$athlete['activities']=$this->get_activities($athlete['id']);
 			$athlete['clubs']=$this->get_athlete_clubs($athlete['id']);
-			$athlete['location']=$db->get_location($athlete['town_id']);
+			#$athlete['location']=$db->get_location($athlete['town_id']);
+			$athlete['total_miles']=array_sum(array_column($athlete['activities'],'miles'));
+			$athlete['total_elevation']=array_sum(array_column($athlete['activities'],'elevation_gain'));
 			return $athlete;
 		}else{
 			return false;

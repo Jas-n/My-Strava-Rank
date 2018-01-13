@@ -1,0 +1,208 @@
+// Include core SCSS
+@import "variables";
+$other_count:	3;
+$nav_small:		10vh;
+$h1:			6vh;
+$main:			100vh - $nav_small;
+$content:		$main - $h1;
+body{
+	overflow:hidden;
+}
+h1{
+	margin-bottom:0;
+}
+.list{
+	display: grid;
+	flex:1 1 auto;
+	grid-gap:$spacer/2;
+	grid-template-columns: repeat(auto-fill, minmax(calc(100vw / 6), 1fr) ) ;
+	grid-auto-rows: minmax(33.3%, 1fr);
+	.item{
+		@include card();
+		&.first{
+			grid-column: auto / span 3;
+			grid-row: auto / span 2;
+		}
+		&.second{
+			grid-column: auto / span 2;
+			grid-row: auto / span 2;
+		}
+		&.third{
+			grid-row: auto / span 2;
+		}
+	}
+}
+main{
+	background-color:#fff;
+	background-position: center;
+	background-size: cover;
+	display:none;
+	height:$main;
+	margin-left:-15px;
+	margin-right:-15px;
+	overflow:hidden;
+	&.add-rank{
+		background-image: url(../images/main/add.jpg);
+	}
+	&.athlete{
+		.distance{
+			.graphic{
+				
+			}
+		}
+		.graphic{
+			flex:1 1 40%;
+		}
+		.road{
+			border-right:1px solid #ccc; // Replace with SVG "road"
+			background:#f33;
+		}
+		section{
+			border-bottom:1px solid #ccc;
+			display:flex;
+			height:$content;
+		}
+		.sections{
+			-ms-overflow-style: none;  // IE 10+
+			overflow: auto;
+			overflow: -moz-scrollbars-none;  // Firefox
+			height:$content;
+			margin-right:-20px;
+			max-height: 100%;
+			padding-right:20px;
+			&::-webkit-scrollbar{
+				display:none;
+			}
+		}
+		.story{
+			flex:1 1 60%;
+			padding:$spacer;
+		}
+		.wrap{
+			display: flex;
+		}
+	}
+	&.athletes{
+		background-image: url(../images/main/athlete.jpg);
+	}
+	&.clubs{
+		background-image: url(../images/main/club.jpg);
+	}
+	&.community{
+		background-image: url(../images/main/community.jpg);
+	}
+	h1{
+		height: $h1;
+		line-height: $h1;
+		padding:0 $spacer;
+	}
+	&.locations{
+		background-image: url(../images/main/location.jpg);
+	}
+	&.login{
+		background-image: url(../images/main/login.jpg);
+	}
+}
+nav{
+	height:100vh;
+	@include transition();
+	&.has-active{
+		height:10vh;
+		section{
+			background-position: center;
+			flex-basis: calc(100% / 6);
+			&:hover{
+				flex-basis:33.3%;
+			}
+			&.active{
+				flex-basis:25%;
+			}
+			&:not(.active){
+				flex-basis:15%;
+			}
+			&.other{
+				flex-basis:45%;
+				flex-direction: row;
+				section{
+					.active{
+						flex-basis:25%;
+					}
+					&:not(.active){
+						flex-basis:15%;
+					}
+				}
+			}
+		}
+		+ main{
+			display:block;
+		}
+	}
+	h2{
+		background:rgba(255,255,255,0.33);
+		color:$primary !important;
+		cursor:pointer;
+		display:block;
+		height:10vh;
+		left:0;
+		line-height:10vh;
+		margin-left:-15px;
+		margin-right:-15px;
+		position:relative;
+		right:0;
+		text-align:center;
+		top:0;
+	}
+	section{
+		background-position: center top;
+		background-size: cover;
+		cursor:pointer;
+		height:100%;
+		overflow:hidden;
+		@include transition();
+		&:hover{
+			flex-basis:33.3%;
+		}
+		&.add-rank{
+			background-image: url(../images/nav/add.jpg);
+		}
+		&.athletes{
+			background-image: url(../images/nav/athlete.jpg);
+		}
+		&.clubs{
+			background-image: url(../images/nav/club.jpg);
+		}
+		&.community{
+			background-image: url(../images/nav/community.jpg);
+		}
+		&.locations{
+			background-image: url(../images/nav/location.jpg);
+		}
+		&.login{
+			background-image: url(../images/nav/login.jpg);
+		}
+		&.other{
+			display:flex;
+			flex-direction: column;
+			padding:0;
+			> *{
+				flex:1 1 calc(100% / #{$other_count});
+				&:hover{
+					flex-basis:calc(100% / #{$other_count} * 2);
+				}
+			}
+		}
+	}
+}
+table{
+	&.ranks{
+		.me{
+			background-color:$primary;
+			color:#fff;
+		}
+	}
+	thead{
+		th{
+			color:$gray-900;
+		}
+	}
+}
