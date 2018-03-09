@@ -1,9 +1,9 @@
 <?php $app_require=array(
-	'php.athletes'
+	'php.athletes',
+	'php.Jasn\MSR\athlete'=>$_POST['id']
 );
 require('../init.php');
-$athlete=$athletes->get_athlete($_POST['id']);
-$h1=$athlete['first_name'];
+$h1=$athlete->first_name;
 require('header.php');
 $sections=array(
 	'bio',

@@ -9,11 +9,12 @@ $app_require=array(
 	'php.athletes',
 	'php.clubs'
 );
-require('../init.php');
+require(__DIR__.'../init.php');
 $month=date('m');
 $day=date('d');
 $hour=date('G');
 if(in_array($hour,array(0,6,12,18))){
+	line();
 	# Collate data for 50 lowest `updatees`
 	if($athletes_=$db->query("SELECT * FROM `athletes` ORDER BY `updates` ASC LIMIT 50")){
 		foreach($athletes_ as $athlete){

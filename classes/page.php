@@ -1,11 +1,12 @@
 <?php class page{	
 	public $slug;
 	public function __construct(){
-		global $core,$app,$db,$user,$default_permissions;
-		if(get_dir()!='CRONS' && get_dir()!='api' && get_dir()!='ajax' && get_dir()!='templates'){
+		/*global $core,$app,$db,$user,$default_permissions;
+		$dir=get_dir();
+		if($dir!='CRONS' && $dir!='api' && $dir!='ajax' && $dir!='templates'){
 			$this->path=substr($_SERVER['SCRIPT_FILENAME'],strlen(ROOT));
 			$this->slug=basename($_SERVER['SCRIPT_NAME'],'.php');
-			$this->dir=get_dir();
+			$this->dir=$dir;
 			if($this->slug=='page' && !$this->dir){
 				$this->slug=$_GET['slug'];
 			}
@@ -27,11 +28,17 @@
 					}
 				}
 				$this->permissions=$this->all_permissions[$user->role_id];
+				error_log(json_encode(array(
+					'permissions'=>$this->permissions,
+					'user'=>$user
+				)));
 				if($this->permissions['view']==0){
 					$core->log_message(2,'Unauthorised access','User tried to access "'.$this->title.'"');
+					error_log(__FILE__.':'.__LINE__);
 					header('Location: ./');
 					exit;
 				}
+				error_log(__FILE__.':'.__LINE__);
 				if($_GET['module']){
 					$this->file=implode('/',array_slice($_GET,0,2));
 				}
@@ -82,7 +89,7 @@
 				$core->log_message(3,'Added new page','Automatically added "'.$title.'" page');
 				$this->__FUNCTION__;
 			}
-		}
+		}*/
 	}
 	public function get_page($page_id,$content=0){
 		global $db;

@@ -51,21 +51,10 @@ class app{
 			$out.='<script src="'.$core->cdn->tinymce.'"></script>
 			<script src="/js/tinymce.js?t='.$core->mtime.'"></script>';
 		}
-		$out.='<script src="/js/php.js?t='.$core->mtime.'"></script>';
+		$out.='<script src="/core/js/php.js?t='.$core->mtime.'"></script>
+		<script src="/js/app.js?t='.$core->mtime.'"></script>';
 		if(!get_dir()){
 			$out.='<script src="/js/root.js?t='.$core->mtime.'"></script>';
-		}
-		if(is_logged_in()){
-			$out.='<script src="/js/logged_in.js?t='.$core->mtime.'"></script>';
-		}
-		if($addresses->addresses){
-			$out.='<script src="/js/addresses.js?t='.$core->mtime.'"></script>';
-		}
-		if(in_array('php.new_calendar',$require)){
-			$out.='<script src="/js/calendar.js?t='.$core->mtime.'"></script>';
-		}
-		if(in_array('php.clients',$require)){
-			$out.='<script src="/js/clients.js?t='.$core->mtime.'"></script>';
 		}
 		if($form_included){
 			$out.='<script src="/core/js/form.js?t='.$core->mtime.'"></script>';
@@ -107,24 +96,6 @@ class app{
 			$out.=crop($page,25).' | ';
 		}
 		echo $out.(defined('SITE_NAME')?SITE_NAME:'glowt');
-	}
-	# Set message for visual output
-	public function set_message($type,$message){
-		switch(strtolower($type)){
-			case 'error':
-				$_SESSION['messages']['errors'][]=$message;
-				break;
-			case 'info':
-			case 'information':
-				$_SESSION['messages']['information'][]=$message;
-				break;
-			case 'success':
-				$_SESSION['messages']['success'][]=$message;
-				break;
-			case 'warning':
-				$_SESSION['messages']['warnings'][]=$message;
-				break;
-		}
 	}
 	# Caching Methods
 	private function minify_css($css){

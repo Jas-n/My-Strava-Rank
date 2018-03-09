@@ -1,24 +1,7 @@
-<?php $distance=$strava->distance_like($athlete['total_miles']);?>
+<?php $distance=$athlete->distances();?>
 <div class="story">
 	<h2>Distance</h2>
-	<p>Since I first joined Strava on the <strong><?=date('jS \of F Y',strtotime($athlete['strava_join']))?></strong> I've covered over <strong><?=number_format(array_sum(array_column($athlete['activities'],'miles')),1)?> miles</strong>.</p>
-	<table class="ranks table">
-		<thead>
-			<tr>
-				<th>Rank</th>
-				<th>Name</th>
-				<th>Distance</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="me">
-				<td>[RANK]</td>
-				<td><?=$athlete['username']?></td>
-				<td>[DISTANCE]</td>
-			</tr>
-		</tbody>
-	</table>
-	// Ranks
+	<p>Since I first joined Strava on the <strong><?=date('jS \of F Y',strtotime($athlete->strava_join))?></strong> I've travelled over <strong><?=number_format($athlete->total_miles,1)?> miles</strong>. I'm currently travelling the equivelant of <strong><?=$distance['like']['to_text']?></strong> and I'm over <strong><?=number_format($distance['like']['complete'])?>%</strong> of the way there.</p>
 </div>
 <div class="graphic <?=$distance['to']?>">
 	<?php print_pre($distance); ?>

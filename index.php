@@ -1,4 +1,7 @@
-<?php include('init.php'); ?>
+<?php include('init.php');
+if($_GET['page']=='add'){
+	include(ROOT.'includes/add.php');
+}?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -11,31 +14,12 @@
 		<title><?=$app->page_title()?></title>
   		<base href="<?=SERVER_NAME?>">
 	</head>
-	<body class="container-fluid">
-		<nav class="row">
-			<section class="col-md js-load athletes">
-				<h2>Athletes</h2>
-			</section>
-			<section class="col-md js-load clubs">
-				<h2>Clubs</h2>
-			</section>
-			<section class="col-md js-load locations">
-				<h2>Locations</h2>
-			</section>
-			<section class="col-md other">
-				<section class="js-load add-rank">
-					<h2>Add Rank</h2>
-				</section>
-				<section class="js-load community">
-					<h2>Community</h2>
-				</section>
-				<section class="js-load login">
-					<h2>Login</h2>
-				</section>
-			</section>
+	<body>
+		<nav>
+			<a href="#"><?=SITE_NAME?></a>
 		</nav>
-		<main>
-			<h1><?=SITE_NAME?></h1>
+		<main class="home">
+			<?php include('t_index.php'); ?>
 		</main>
 		<?=$app->get_foot_js();?>
 	</body>

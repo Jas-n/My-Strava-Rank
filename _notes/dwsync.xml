@@ -4,7 +4,11 @@
 <file name=".htaccess" server="jas-n.com/www/jas-n.com/strava/" local="131046967514209302" remote="131046931200000000" Dst="2" />
 <file name="init.php" server="jas-n.com/www/jas-n.com/strava/" local="131036749053664894" remote="131036712600000000" Dst="2" />
 <file name="index.php" server="jas-n.com/www/jas-n.com/strava/" local="131047915248807388" remote="131047879200000000" Dst="2" />
-<file name="index.php" server="jas-n.com/mystravarank.jas-n.com/" local="131585252056468485" remote="131585251800000000" Dst="1" />
-<file name="init.php" server="jas-n.com/mystravarank.jas-n.com/" local="131585197313923291" remote="131585197200000000" Dst="1" />
-<file name="functions.php" server="jas-n.com/mystravarank.jas-n.com/" local="131536989185487535" remote="131536989000000000" Dst="2" />
+<file name="index.php" server="jas-n.com/mystravarank.jas-n.com/" local="131633709171170049" remote="131633709000000000" Dst="1" />
+<file name="init.php" server="jas-n.com/mystravarank.jas-n.com/" local="131633678380074093" remote="131633677800000000" Dst="1" />
+<file name="t_athletes.php" server="jas-n.com/mystravarank.jas-n.com/" local="131637994008969672" remote="131637993600000000" Dst="1" />
+<file name="t_footer.php" server="jas-n.com/mystravarank.jas-n.com/" local="131548699621158052" remote="131633682000000000" Dst="1" />
+<file name="t_header.php" server="jas-n.com/mystravarank.jas-n.com/" local="131548784521365479" remote="131633682000000000" Dst="1" />
+<file name="t_index.php" server="jas-n.com/mystravarank.jas-n.com/" local="131633708567099741" remote="131633708400000000" Dst="1" />
+<file name="error_log.txt" server="jas-n.com/mystravarank.jas-n.com/" local="131634394200000000" remote="131634394200000000" Dst="1" />
 </dwsync>

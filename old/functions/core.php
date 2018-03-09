@@ -1,20 +1,4 @@
 <?php basename($_SERVER['PHP_SELF'])=='core.php'?die('Access Denied'):'';
-# PHP compatibility functions
-foreach(scandir(ROOT.'functions') as $dir){
-	if(!in_array($dir,array('.','..')) && is_dir(ROOT.'functions/'.$dir)){
-		foreach(scandir(ROOT.'functions/'.$dir) as $file){
-			if(!in_array($file,array('.','..','index.php'))){
-				include(ROOT.'functions/'.$dir.'/'.$file);
-			}
-		}
-	}
-}
-# Auto-load Classes
-spl_autoload_register(function($class){
-	if(is_file(ROOT.'classes/'.$class.'.php')){
-		require_once(ROOT.'classes/'.$class.'.php');
-	}
-});
 set_error_handler('log_errors',~E_NOTICE);
 register_shutdown_function(function(){
 	$error = error_get_last();

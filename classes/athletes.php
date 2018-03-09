@@ -1,4 +1,5 @@
-<?php class athletes{
+<?php namespace Jasn\MSR;
+class athletes{
 	public function get_activities($athlete_id){
 		global $db;
 		if($data=$db->query("SELECT * FROM `activities` WHERE `athlete_id`=?",$athlete_id)){
@@ -79,7 +80,18 @@
 			$where='WHERE ('.implode(') AND (',$where).')';
 		}
 		if($athletes=$db->query(
-			"SELECT *
+			"SELECT
+				`athletes`.*,
+				(SELECT `name` FROM `ranks` WHERE `points`<`athletes`.`points` ORDER BY `id` DESC LIMIT 1) as `rank`,
+				(
+					SELECT `points` FROM `ranks` WHERE `id`=(
+						IF(
+							(SELECT `id` FROM `ranks` WHERE `points`>`athletes`.`points` ORDER BY `id` DESC LIMIT 1),
+							(SELECT `id` FROM `ranks` WHERE `points`>`athletes`.`points` ORDER BY `id` DESC LIMIT 1),
+							(SELECT `id` FROM `ranks` ORDER BY `id` DESC LIMIT 1)
+						)
+					)
+				) as `next_rank_points`
 			FROM `athletes`
 			".$where."
 			".$order_s."
