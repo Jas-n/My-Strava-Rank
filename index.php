@@ -15,8 +15,22 @@ if($_GET['page']=='add'){
   		<base href="<?=SERVER_NAME?>">
 	</head>
 	<body>
-		<nav>
-			<a href="#"><?=SITE_NAME?></a>
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<a class="navbar-brand" href="#"><?=SITE_NAME?></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+  			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link active js-load index">Home<span class="sr-only"> (current)</span></a></li>
+					<li class="nav-item"><a class="nav-link js-load athletes">Athletes</a></li>
+					<li class="nav-item"><a class="nav-link js-load clubs">Clubs</a></li>
+					<li class="nav-item"><a class="nav-link js-load locations">Locations</a></li>
+					<li class="nav-item"><a class="nav-link js-load community">Community</a></li>
+					<li class="nav-item"><a class="nav-link js-load login">Login</a></li>
+					<li class="nav-item"><a class="nav-link" data-link="<?=$strava->authenticationUrl(SERVER_NAME.'add','auto');?>">Add Rank</a></li>
+				</ul>
+			</div>
 		</nav>
 		<main class="home">
 			<?php include('t_index.php'); ?>
