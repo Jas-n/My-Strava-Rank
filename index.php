@@ -1,6 +1,7 @@
 <?php include('init.php');
-if($_GET['page']=='add'){
+if($_GET['file']=='add'){
 	include(ROOT.'includes/add.php');
+	exit;
 }?>
 <!doctype html>
 <html lang="en">
@@ -33,7 +34,15 @@ if($_GET['page']=='add'){
 			</div>
 		</nav>
 		<main class="home">
-			<?php include('t_index.php'); ?>
+			<?php if($_GET['file']){
+				if(is_file(ROOT.'t_'.$_GET['file'].'.php')){
+					include(ROOT.'t_'.$_GET['file'].'.php');
+				}else{
+					include(ROOT.'t_error.php');
+				}
+			}else{
+				include(ROOT.'t_index.php');
+			} ?>
 		</main>
 		<?=$app->get_foot_js();?>
 	</body>

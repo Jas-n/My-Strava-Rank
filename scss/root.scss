@@ -1,7 +1,5 @@
 // Include core SCSS
 @import "variables";
-$nav:	6vh;
-$main:	100vh - $nav;
 body{
 	overflow:hidden;
 }
@@ -108,7 +106,7 @@ section{
 	cursor:pointer;
 	display:grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	height:$main;
+	height:calc(100vh - 46px);
 	@include transition();
 }
 table{
