@@ -7,6 +7,7 @@ body{
 	.item{
 		background:rgba(#fff,.4);
 		border-radius:$spacer/4;
+		cursor:pointer;
 		margin-bottom:$spacer/2;
 		padding:$spacer;
 		&.first{
@@ -43,11 +44,12 @@ body{
 }
 main{
 	cursor:default;
-	&:not(.home){
+	min-height:calc(100vh - 48px);
+	&:not(.index){
 		padding:$spacer;
 		overflow: auto;
 	}
-	&.home{
+	&.index{
 		h1{
 			display:none;
 		}
@@ -69,6 +71,7 @@ section{
 	&.add-rank{
 		background-image: url(../images/nav/add.jpg);
 	}
+	&.athlete,
 	&.athletes{
 		background-image: url(../images/nav/athlete.jpg);
 	}
@@ -99,7 +102,7 @@ section{
 		}
 	}
 	.nav-link{
-		padding:$spacer/2 0;
+		padding:$spacer*.75 !important;
 	}
 }
 .sections{

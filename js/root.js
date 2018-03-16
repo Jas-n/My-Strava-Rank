@@ -20,14 +20,20 @@ var msr={
 			}else{
 				what=target.className.substring(from+8);
 			}
+			$('.navbar-nav a').removeClass('active');
+			if($('.navbar-nav a.'+what)){
+				$('.navbar-nav a.'+what).addClass('active');
+			}
+			var data={
+				id:target_id,
+				page:msr.page
+			};
 			$('main').load(
 				'/t_'+what+'.php',
-				{
-					id:target_id,
-					page:msr.page
-				},
+				data,
 				function(){
 					$('main').get(0).className=what;
+					window.history.pushState(data,what,what+(target_id?'/'+target_id:''));
 				}
 			);
 		});

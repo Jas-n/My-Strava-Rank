@@ -1,10 +1,10 @@
-ErrorDocument 403 /error.php
-ErrorDocument 404 /error.php
-ErrorDocument 405 /error.php
-ErrorDocument 408 /error.php
-ErrorDocument 500 /error.php
-ErrorDocument 502 /error.php
-ErrorDocument 504 /error.php
+ErrorDocument 403 /error
+ErrorDocument 404 /error
+ErrorDocument 405 /error
+ErrorDocument 408 /error
+ErrorDocument 500 /error
+ErrorDocument 502 /error
+ErrorDocument 504 /error
 
 RewriteEngine On
 RewriteBase /

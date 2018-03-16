@@ -33,7 +33,7 @@ if($_GET['file']=='add'){
 				</ul>
 			</div>
 		</nav>
-		<main class="home">
+		<main class="index">
 			<?php if($_GET['file']){
 				if(is_file(ROOT.'t_'.$_GET['file'].'.php')){
 					include(ROOT.'t_'.$_GET['file'].'.php');
