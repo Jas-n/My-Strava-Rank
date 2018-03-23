@@ -11,10 +11,27 @@ class athletes{
 	}
 	public function get_athlete($id){
 		global $db;
-		if($athlete=$db->get_row("SELECT * FROM `athletes` WHERE `hex_id`=? OR `id`=?",array($id,$id))){
+		if($athlete=$db->get_row(
+			"SELECT
+				*,
+				(SELECT `name` FROM `ranks` WHERE `points`<`athletes`.`points` ORDER BY `id` DESC LIMIT 1) as `rank`,
+				(
+					SELECT `points` FROM `ranks` WHERE `id`=(
+						IF(
+							(SELECT `id` FROM `ranks` WHERE `points`>`athletes`.`points` ORDER BY `id` DESC LIMIT 1),
+							(SELECT `id` FROM `ranks` WHERE `points`>`athletes`.`points` ORDER BY `id` DESC LIMIT 1),
+							(SELECT `id` FROM `ranks` ORDER BY `id` DESC LIMIT 1)
+						)
+					)
+				) as `next_rank_points`
+			FROM `athletes`
+			WHERE
+				? IN(`hex_id`,`id`)",
+			$id
+		)){
 			$athlete['ranks']=array(
 				'all'	=>$db->get_value("SELECT COUNT(1) FROM `athletes` WHERE `points` >=?",$athlete['points']),
-				'gender'	=>$db->get_value("SELECT COUNT(1) FROM `athletes` WHERE `points` >=? AND `sex`=?",array($athlete['points'],$athlete['sex'])),
+				'gender'=>$db->get_value("SELECT COUNT(1) FROM `athletes` WHERE `points` >=? AND `sex`=?",array($athlete['points'],$athlete['sex'])),
 				'town'	=>$db->get_value("SELECT COUNT(1) FROM `athletes` WHERE `points` >=? AND `town_id`=?",array($athlete['points'],$athlete['town_id']))
 			);
 			asort($athlete['ranks']);

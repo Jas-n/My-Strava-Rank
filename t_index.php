@@ -6,7 +6,7 @@ require('t_header.php');?>
 		<h2>Athletes</h2>
 		<div class="container-fluid"></div>
 	</section>
-	<section class="js-load clubs">
+	<!--section class="js-load clubs">
 		<h2>Clubs</h2>
 		<div class="container-fluid"></div>
 	</section>
@@ -21,7 +21,7 @@ require('t_header.php');?>
 	<section class="js-load login">
 		<h2>Login</h2>
 		<div class="container-fluid"></div>
-	</section>
+	</section-->
 	<section class="add-rank" data-link="<?=$strava->authenticationUrl(SERVER_NAME.'add','auto');?>">
 		<h2>Add Rank</h2>
 	</section>

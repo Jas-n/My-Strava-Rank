@@ -1,14 +1,20 @@
 <?php require('init.php');
-$athlete=new Jasn\MSR\athlete($_POST['id']);
+if(basename($_SERVER['SCRIPT_NAME'],'.php')=='t_athlete' && $_POST){
+	$athlete=$_POST['id'];
+}else{
+	$athlete=$_GET['id'];
+}
+$athlete=new Jasn\MSR\athlete($athlete);
 $h1=$athlete->first_name;;
 require('t_header.php');
 $sections=array(
 	'bio',
 	'distance',
 	'altitude',
-	'clubs',
+	#'clubs',
 	'ranks'
-);?>
+);
+$bootstrap->progress($athlete->points,$athlete->next_rank_points,'','warning');?>
 <div class="sections">
 	<!--// SVG background = transparent > background colour to show progress?
 	<svg class="road" height="1080" width="100" xmlns="http://www.w3.org/2000/svg">

@@ -1,10 +1,4 @@
 <?php # Auto-load Classes
-# Auto-load Classes
-spl_autoload_register(function($class){
-	if(is_file(ROOT.'classes/'.$class.'.php')){
-		require_once(ROOT.'classes/'.$class.'.php');
-	}
-});
 set_error_handler('log_errors',~E_NOTICE);
 register_shutdown_function(function(){
 	$error = error_get_last();
@@ -115,54 +109,44 @@ function elevation_like($miles){
 		$max=false;
 		$mountain='Mt. Vesuvious';
 		$mountain_height=1281;
+		$to='vesuvious';
 	}elseif($meters<3376){
 		$max=false;
 		$mountain='Mt. Fuji';
 		$mountain_height=3376;
+		$to='fuji';
 	}elseif($meters<4808){
 		$max=false;
 		$mountain='Mont Blanc';
 		$mountain_height=4810;
+		$to='mont_blanc';
 	}elseif($meters<5895){
 		$max=false;
 		$mountain='Mt. Kilimanjaro';
 		$mountain_height=5895;
+		$to='kilimanjaro';
 	}elseif($meters<8611){
 		$max=false;
 		$mountain='K2';
 		$mountain_height=8611;
+		$to='k2';
 	}else{
 		$max=($meters>8848?true:false);
 		$mountain='Mt. Everest';
 		$mountain_height=8848;
+		$to='everest';
 	}
 	return array(
 		'max'		=>$max,
-		'mountain'	=>$mountain,
+		'to'		=>$to,
+		'to_text'	=>$mountain,
 		'times'		=>floor($meters/$mountain_height),
 		'complete'	=>round(($meters/$mountain_height-floor($meters/$mountain_height))*100,2)
 	);
 }
-function get_dir($level=0){
-	$history=debug_backtrace();
-	$calling_file=dirname($history[sizeof($history)-1]['file']);
-	$dir=explode('/',str_replace(ROOT,'',$calling_file.'/'));
-	array_pop($dir);
-	return $dir[sizeof($dir)-1-$level];
-}
 # Checks if a user is logged in
 function is_logged_in(){
 	return !!($_SESSION['user_id']);
-}
-# Return formatted __LINE__
-# Updated 26/01/2017 13:08
-function line($return=false){
-	$stack=debug_backtrace()[0];
-	$line=$stack['file'].': '.$stack['line'].'<br>';
-	if($return){
-		return $line;
-	}
-	echo $line;
 }
 function log_errors($severity,$message,$file,$line,array $context=NULL){
 	global $db;
@@ -172,21 +156,6 @@ function log_errors($severity,$message,$file,$line,array $context=NULL){
 		restore_error_handler();
 	}
 	return true;
-}
-# Print Preformated
-# Updated 08-09-2016 17:22
-function print_pre($expression,$return=false){
-	$history=debug_backtrace();
-	$history=$history[0];
-	$out='<div class="print_pre">
-		Debug<br><small><em>'.$history['file'].': '.$history['line'].'</em></small>
-		<pre>'.htmlspecialchars(print_r($expression,true)).'</pre>
-	</div>';
-	if($return){
-		return $out;
-	}else{
-		echo $out;
-	}
 }
 # Returns a date reformated fron SQL
 # Updated 29/03/2017 21:29
@@ -213,6 +182,32 @@ function sql_datetime($datetime_from_sql){
 		return false;
 	}
 	return sql_date($datetime_from_sql).' at '.date(TIME_FORMAT,$time);
+}
+function date_difference($from,$to){
+	$from	=date_create($from);
+	$to		=date_create($to);
+	$diff	=date_diff($from,$to);
+	$years	=$diff->format('%y');
+	$months	=$diff->format('%m');
+	$days	=$diff->format('%d');
+	if($years){
+		$years=pluralize_if($years,'year');
+	}
+	if($months){
+		$months=pluralize_if($months,'month');
+	}
+	if($days){
+		$days=pluralize_if($days,'day');
+	}
+	if($years && $months && $days){
+		$years.=',';
+	}elseif($years && ($months || $days)){
+		$years.=' and';
+	}
+	if($months && $days){
+		$months.=' and';
+	}
+	return implode(' ',[$years,$months,$days]);
 }
 # activity to noun
 function to_noun($word){

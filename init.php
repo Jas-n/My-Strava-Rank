@@ -1,11 +1,9 @@
 <?php # If the site is not in a root directory
-define("ROOT",__DIR__.'/');
-define('CORE',ROOT.'/core/');
 $namespace=array(
 	'company'=>'Jasn',
 	'project'=>'MSR'
 );
-require_once(CORE.'init.php');
+require_once(__DIR__.'/core/init.php');
 /* Append new query string to _GET */
 if(!defined('ROOT')){
 	$_get=explode('?',$_SERVER['REQUEST_URI']);
@@ -59,7 +57,9 @@ if($app_require){
 		}
 	}
 }
-
+if(!$_GET['file']){
+	$_GET['file']='index';
+}
 
 
 

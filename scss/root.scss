@@ -1,7 +1,51 @@
 // Include core SCSS
 @import "variables";
-body{
-	overflow:hidden;
+.graphic{
+	background-position: center;
+	background-size: cover;
+	// Bio
+	&.athlete{
+		background-image:url(../images/main/athlete.jpg);
+	}
+	// Altitude
+	&.everest{
+		background-image:url(../images/altitude/everest.png);
+	}
+	&.kilimanjaro{
+		background-image:url(../images/altitude/kilimanjaro.jpg);
+	}
+	// Distance
+	&.europe{
+		background-image:url(../images/distance/europe.svg);
+	}
+}
+h1{
+	margin-bottom:0;
+}
+.index{
+	overflow: hidden;
+	h1{
+		display:none;
+	}
+	h2{
+		background:rgba(255,255,255,0.33);
+		color:$orange;
+		cursor:pointer;
+		margin-bottom:0;
+		padding:$spacer/2;
+		text-align: center;
+		@include transition();
+	}
+	section{
+		flex:1 0 33%;
+	}
+	.sections{
+		cursor:pointer;
+		display:flex;
+		flex-wrap: nowrap;
+		height:calc(100vh - 46px);
+		@include transition();
+	}
 }
 .list{
 	.item{
@@ -42,28 +86,6 @@ body{
 		}
 	}
 }
-main{
-	cursor:default;
-	min-height:calc(100vh - 48px);
-	&:not(.index){
-		padding:$spacer;
-		overflow: auto;
-	}
-	&.index{
-		h1{
-			display:none;
-		}
-		h2{
-			background:rgba(255,255,255,0.33);
-			color:$primary;
-			cursor:pointer;
-			margin-bottom:0;
-			padding:$spacer/2;
-			text-align: center;
-			@include transition();
-		}
-	}
-}
 main,
 section{
 	background-position: center top;
@@ -71,7 +93,6 @@ section{
 	&.add-rank{
 		background-image: url(../images/nav/add.jpg);
 	}
-	&.athlete,
 	&.athletes{
 		background-image: url(../images/nav/athlete.jpg);
 	}
@@ -88,34 +109,59 @@ section{
 		background-image: url(../images/nav/login.jpg);
 	}
 }
+main{
+	cursor:default;
+	margin-top:44px;
+	min-height:calc(100vh - 48px);
+	&:not(.index):not(.athlete){
+		padding:$spacer;
+		overflow: auto;
+		header{
+			padding:$spacer/2;
+		}
+	}
+	&.athlete{
+		h1{
+			padding:$spacer;
+		}
+		.progress{
+			border-radius:0;
+			height:$spacer/4;
+		}
+		section{
+			border-top:1px solid $orange;
+			display:flex;
+			flex-wrap:nowrap;
+			//height:calc(100vh - 48px);
+			//overflow:hidden;
+			> :first-child{
+				padding:$spacer;
+			}
+			> *{
+				flex:0 0 50%;
+				max-width:50%;
+			}
+		}
+	}
+}
 .navbar{
+	background-color:#fff;
 	padding:0;
 	&-brand{
 		padding:$spacer/2 $spacer;
 	}
-	&-light{
-		.navbar{
-			&-brand,
-			&-nav .nav-link.active{
-				color:$primary;
-			}
-		}
+	&-brand,
+	&-nav .nav-link.active{
+		color:$orange;
 	}
 	.nav-link{
 		padding:$spacer*.75 !important;
 	}
 }
-.sections{
-	cursor:pointer;
-	display:grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	height:calc(100vh - 46px);
-	@include transition();
-}
 table{
 	&.ranks{
 		.me{
-			background-color:$primary;
+			background-color:$orange;
 			color:#fff;
 		}
 	}

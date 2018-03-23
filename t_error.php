@@ -17,6 +17,6 @@ if($_GET['page']){
 }elseif($title==false || strlen($status)!=3){
 	$message='Please supply a valid status code.';
 }
-require('t_header.php'); ?>
+require('t_header.php');?>
 <p><?=$message?></p>
 <?php require('t_footer.php');

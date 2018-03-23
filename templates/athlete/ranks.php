@@ -1,6 +1,5 @@
 <div class="story">
 	<h2>Ranks</h2>
-	// Ranks
 	<h3>Distance</h3>
 	<table class="ranks table table-sm">
 		<thead>
