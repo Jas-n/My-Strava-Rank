@@ -22,7 +22,7 @@ $ranks=$athletes->get_athletes();?>
 			}?>
 			<div class="item <?=$class?$class.' ':''?>js-load athlete" data-id="<?=$rank['hex_id']?>">
 				<h4><?=$position?> - <?=$rank['username']?$rank['username']:$rank['first_name'].' '.substr($rank['last_name'],0,1)?> - <?=number_format($rank['points'])?></h4>
-				<?=$bootstrap->progress($rank['points'],$rank['next_rank_points'],$rank['rank'])?>
+				<?=$bootstrap->progress($rank['points'],$rank['next_rank_points'],'','warning')?>
 			</div>
 		<?php }
 	} ?>
