@@ -25,7 +25,7 @@ if($_GET['file']=='add'){
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link active js-load index">Home<span class="sr-only"> (current)</span></a></li>
 					<li class="nav-item"><a class="nav-link js-load athletes">Athletes</a></li>
-					<!--li class="nav-item"><a class="nav-link js-load clubs">Clubs</a></li>
+					<li class="nav-item"><a class="nav-link js-load clubs">Clubs</a></li>
 					<li class="nav-item"><a class="nav-link js-load locations">Locations</a></li>
 					<li class="nav-item"><a class="nav-link js-load community">Community</a></li>
 					<li class="nav-item"><a class="nav-link js-load login">Login</a></li-->

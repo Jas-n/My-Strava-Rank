@@ -11,12 +11,18 @@
 	&.everest{
 		background-image:url(../images/altitude/everest.png);
 	}
+	&.vesuvious{
+		background-image:url(../images/altitude/vesuvius.jpg);
+	}
 	&.kilimanjaro{
 		background-image:url(../images/altitude/kilimanjaro.jpg);
 	}
 	// Distance
 	&.europe{
 		background-image:url(../images/distance/europe.svg);
+	}
+	&.uk_width{
+		background-image:url(../images/distance/uk.svg);
 	}
 }
 h1{
@@ -53,6 +59,8 @@ h1{
 		border-radius:$spacer/4;
 		cursor:pointer;
 		margin-bottom:$spacer/2;
+		padding:$spacer/2;
+		position:relative;
 		&.first{
 			background:rgba(#fff,1);
 			h4{
@@ -86,7 +94,11 @@ h1{
 		.progress{
 			border-top-left-radius:0;
 			border-top-right-radius:0;
+			bottom:0;
 			height:$spacer/4;
+			left:0;
+			position: absolute;
+			right:0;
 		}
 	}
 }

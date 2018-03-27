@@ -5,6 +5,9 @@ var msr={
 		$('.add-rank').click(function(){
 			window.location=this.dataset.link;
 		});
+		window.onpopstate = function(e) {
+			console.log(e);
+		};
 	},
 	load_sections:function(){
 		$('body').on('click','.js-load',function(e){
