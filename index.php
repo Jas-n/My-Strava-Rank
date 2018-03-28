@@ -2,7 +2,7 @@
 if($_GET['file']=='add'){
 	include(ROOT.'includes/add.php');
 	exit;
-}?>
+} ?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -17,7 +17,7 @@ if($_GET['file']=='add'){
 	</head>
 	<body>
 		<nav class="navbar fixed-top navbar-expand-lg">
-			<a class="navbar-brand" href="#"><?=SITE_NAME?></a>
+			<a class="navbar-brand" href="<?=SERVER_NAME?>"><?=SITE_NAME?></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
   			</button>
@@ -25,7 +25,7 @@ if($_GET['file']=='add'){
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link active js-load index">Home<span class="sr-only"> (current)</span></a></li>
 					<li class="nav-item"><a class="nav-link js-load athletes">Athletes</a></li>
-					<li class="nav-item"><a class="nav-link js-load clubs">Clubs</a></li>
+					<!--li class="nav-item"><a class="nav-link js-load clubs">Clubs</a></li>
 					<li class="nav-item"><a class="nav-link js-load locations">Locations</a></li>
 					<li class="nav-item"><a class="nav-link js-load community">Community</a></li>
 					<li class="nav-item"><a class="nav-link js-load login">Login</a></li-->

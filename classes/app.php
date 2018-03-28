@@ -8,9 +8,6 @@ class app{
 		}
 		$out='';
 		$css_files=$core->get_css();
-		if($require && in_array('php.new_calendar',$require)){
-			$css_files[]='/css/calendar.css?t='.$core->mtime;
-		}
 		foreach($css_files as $css_file){
 			$out.='<link rel="stylesheet" href="'.$css_file.'">';
 		}
@@ -75,25 +72,18 @@ class app{
 	# Get page title
 	public function page_title(){
 		global $core;
-		if($_GET['module']){
-			$module_name=$this->modules[$this->get_module_id($_GET['module'])]['name'];
-		}
-		if($this->page_title && strtolower($this->page_title)!='index'){
-			$out=crop($this->page_title,25).' | ';
-		}else{
-			$page=$core->page['slug'];
-			if($page=='index' && get_dir()){
-				$page='Dashboard';
-			}elseif($page=='module'){
-				if($_GET['file']=='index'){
-					$page=$module_name;
-				}else{
-					$page=$core->page['slug'];
+		if(strtolower($core->page['slug'])!='index'){
+			if($core->page['title']){
+				$out=crop($core->page['title'],25).' | ';
+			}else{
+				$page=$core->page['slug'];
+				if($page=='index' && get_dir()){
+					$page='Dashboard';
 				}
-			};
-			$page=ucwords(str_replace(array('-','_'),' ',$page));
-			$this->page_title=$page;
-			$out.=crop($page,25).' | ';
+				$page=ucwords(str_replace(array('-','_'),' ',$page));
+				$core->page['title']=$page;
+				$out.=crop($page,25).' | ';
+			}
 		}
 		echo $out.(defined('SITE_NAME')?SITE_NAME:'glowt');
 	}

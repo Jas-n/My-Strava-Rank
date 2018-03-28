@@ -5,7 +5,7 @@ var msr={
 		$('.add-rank').click(function(){
 			window.location=this.dataset.link;
 		});
-		window.onpopstate = function(e) {
+		window.onpopstate=function(e){
 			console.log(e);
 		};
 	},
@@ -35,7 +35,12 @@ var msr={
 				'/t_'+what+'.php',
 				data,
 				function(){
+					var title='';
+					if(what!='index'){
+						title=php.ucwords(what)+' | ';
+					}
 					$('main').get(0).className=what;
+					$('title').text(title+'My Strava Rank');
 					window.history.pushState(data,what,what+(target_id?'/'+target_id:''));
 				}
 			);
