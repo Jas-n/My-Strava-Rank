@@ -10,16 +10,15 @@ if($_GET['file']=='add'){
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<?php $app->get_css();
-		$core->get_head_js();
-		$app->get_icons();?>
+		$core->get_header();?>
 		<title><?=$app->page_title()?></title>
   		<base href="<?=SERVER_NAME?>">
 	</head>
 	<body>
-		<nav class="navbar fixed-top navbar-expand-lg">
+		<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand" href="<?=SERVER_NAME?>"><?=SITE_NAME?></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
+				<?=file_get_contents(ROOT.'images/bars.svg')?>
   			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ml-auto">
