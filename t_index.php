@@ -1,6 +1,6 @@
 <?php require_once('init.php');
-$h1=SITE_NAME;
 require('t_header.php');?>
+<h1><?=SITE_NAME?></h1>
 <div class="sections">
 	<section class="js-load athletes">
 		<h2>Athletes</h2>

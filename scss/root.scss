@@ -1,5 +1,10 @@
 // Include core SCSS
 @import "variables";
+// Temp
+.cols-md-2{
+	column-count: 2;
+}
+// Root
 .graphic{
 	background-position: center;
 	background-size: cover;
@@ -138,9 +143,6 @@ main{
 		}
 	}
 	&.athlete{
-		h1{
-			padding:$spacer;
-		}
 		.progress{
 			border-radius:0;
 			height:$spacer/4;
@@ -149,12 +151,17 @@ main{
 			border-top:1px solid $orange;
 			display:flex;
 			flex-wrap:nowrap;
-			//height:calc(100vh - 48px);
-			//overflow:hidden;
+			height:calc(100vh - 48px);
+			overflow:hidden;
 			> :first-child{
 				padding:$spacer;
 			}
-			> *{
+			> .full{
+				flex:0 0 100%;
+				max-width:100%;
+			}
+			> .graphic,
+			> .story{
 				flex:0 0 50%;
 				max-width:50%;
 			}
@@ -192,6 +199,16 @@ main{
 	}
 	.nav-link{
 		padding:$spacer*.75 !important;
+	}
+}
+.rank{
+	break-inside: avoid-column;
+}
+#svg-road{
+	height:calc(100vh - 48px);
+	position: fixed;
+	path{
+		stroke:$orange;
 	}
 }
 table{

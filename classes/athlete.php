@@ -16,6 +16,7 @@ class athlete extends athletes{
 					$this->favourite_activity['activity']=to_noun($data['activity']);
 				}
 			}
+			$this->ranks=$this->ranks();
 		}
 	}
 	public function distances(){
@@ -27,5 +28,38 @@ class athlete extends athletes{
 		return array(
 			'like'=>elevation_like($this->total_elevation)
 		);
+	}
+	public function ranks(){
+		global $db;
+		# All Athletes
+		$select="SELECT
+			`hex_id`,IF(`username`<>'',`username`,CONCAT(`first_name`,' ',LEFT(`last_name`,1))) as `name`,`points`,`points` as `count`,
+			FIND_IN_SET(
+				`points`,
+				(
+					SELECT GROUP_CONCAT(`points` ORDER BY `points` DESC)
+					FROM `athletes`
+				)
+			) as `rank` ";
+		$ranks['My Strava Rank']=$db->query(
+			$select."from `athletes` where id = ?
+			union all (".
+				$select."from `athletes`
+				where `athletes`.`points` <  (select `athletes`.`points` from `athletes` where `id` = ?) 
+				order by `athletes`.`points` ASC limit 5
+			)
+			union all (".
+				$select."from `athletes`
+			  where `athletes`.`points` > (select `athletes`.`points` from athletes where `id` = ?) 
+			  order by `athletes`.`points` DESC limit 5
+			)
+			ORDER BY `points` ASC",
+			array(
+				$this->id,
+				$this->id,
+				$this->id
+			)
+		);
+		return $ranks;
 	}
 }
