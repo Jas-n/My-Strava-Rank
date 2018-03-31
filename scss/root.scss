@@ -151,7 +151,8 @@ main{
 			border-top:1px solid $orange;
 			display:flex;
 			flex-wrap:nowrap;
-			height:calc(100vh - 48px);
+			max-height:calc(100vh - 48px);
+			min-height:300px;
 			overflow:hidden;
 			> :first-child{
 				padding:$spacer;
@@ -206,7 +207,10 @@ main{
 }
 #svg-road{
 	height:calc(100vh - 48px);
+	left:100px;
+	margin:auto;
 	position: fixed;
+	right:0;
 	path{
 		stroke:$orange;
 	}

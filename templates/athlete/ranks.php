@@ -18,7 +18,7 @@
 								$is_me=$athlete->hex_id==$rank['hex_id']; ?>
 								<tr<?=$is_me?' class="me"':''?>>
 									<td><?=number_format($rank['rank'])?></td>
-									<td><?=(!$is_me?'<a href="/athletes/'.$rank['hex_id'].'" alt="'.$rank['name'].'">':'').$rank['name'].(!$is_me?'</a>':'')?></a></td>
+									<td><?=(!$is_me?'<a href="/athlete/'.$rank['hex_id'].'" alt="'.$rank['name'].'">':'').$rank['name'].(!$is_me?'</a>':'')?></a></td>
 									<td><?=number_format($rank['count'])?></td>
 								</tr>
 							<?php } ?>

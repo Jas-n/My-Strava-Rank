@@ -7,7 +7,25 @@ var msr = {
 			window.location = this.dataset.link;
 		});
 		window.onpopstate = function (e) {
-			console.log(e);
+			var data = {};
+			var what = location.pathname.substr(1);
+			if (what.indexOf('/')) {
+				var split = what.split('/');
+				data.id = split[1];
+				what = split[0];
+			}
+			$('main').load(
+				'/t_' + what + '.php',
+				data,
+				function () {
+					var title = '';
+					if (what != 'index') {
+						title = php.ucwords(what) + ' | ';
+					}
+					$('main').get(0).className = what;
+					$('title').text(title + 'My Strava Rank');
+				}
+			);
 		};
 	},
 	load_sections: function () {
@@ -53,7 +71,7 @@ var msr = {
 			var navheight = document.querySelector('.navbar').getBoundingClientRect().height;
 			svg.setAttribute('height', window.innerHeight - navheight);
 			var path = document.querySelector('#svg-road-path');
-			var pathLength = path.getTotalLength();
+			var pathLength = 1150;
 			path.style.strokeDasharray = pathLength + ' ' + pathLength;
 			path.style.strokeDashoffset = pathLength;
 			path.getBoundingClientRect();
