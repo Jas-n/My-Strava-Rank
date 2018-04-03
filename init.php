@@ -18,9 +18,7 @@ spl_autoload_register(function($class){
 		require_once(ROOT.'libraries/'.$class.'/'.$class.'.php');
 	}
 });
-$core		=new Formation\Core\core;
 $app		=new Jasn\MSR\app;
-$bootstrap	=new Formation\Core\bootstrap;
 $fontawesome=new Formation\Core\fontawesome('light');
 $user		=new user();
 $page		=new page();

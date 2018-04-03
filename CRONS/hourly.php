@@ -1,14 +1,9 @@
-<?php define('CRON',true);
-set_time_limit(0);
-ini_set('memory_limit',-1);
-$app_require=array(
+<?php $app_require=array(
 	'php.Jasn\MSR\athletes',
 	'php.Jasn\MSR\clubs'
 );
 require(__DIR__.'/../init.php');
-$month	=date('m');
-$day	=date('d');
-$hour	=date('G');
+require_once(CORE.'cron.php');
 if(in_array($hour,array(0,6,12,18))){
 	# Collate data for 50 lowest `updatees`
 	if($athletes_=$db->query("SELECT * FROM `athletes` ORDER BY `updates` ASC LIMIT 1")){ # Limit 50
@@ -112,11 +107,6 @@ if(in_array($hour,array(0,6,12,18))){
 # Hour specific
 switch($hour){
 	case 0:
-		# Clear logs
-		$db->query("DELETE FROM `logs` WHERE `date` < ?",date('Y-m-d H:i:s',strtotime("-".LOGS_AGE." days")));
-		if($db->rows_updated()){
-			$cron_messages[]="Deleted ".$db->rows_updated()." logs that are older than ".LOGS_AGE." days.";
-		}
 		# Recalculate ranks
 		$top_points=$db->get_value("SELECT MAX(`points`)*.9 FROM `athletes`");
 		$top_rank=$db->get_row("SELECT `id`,`points` FROM `ranks` ORDER BY `id` DESC");

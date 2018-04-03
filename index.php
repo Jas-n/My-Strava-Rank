@@ -10,9 +10,8 @@ if($_GET['file']=='add'){
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<?php $app->get_css();
-		$core->get_head_js();
-		$app->get_icons();?>
-		<title><?=$app->page_title()?></title>
+		$core->get_header();?>
+		<title><?=$core->page['title']?></title>
   		<base href="<?=SERVER_NAME?>">
 	</head>
 	<body>
