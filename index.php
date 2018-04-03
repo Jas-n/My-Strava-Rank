@@ -11,11 +11,7 @@ if($_GET['file']=='add'){
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<?php $app->get_css();
 		$core->get_header();?>
-<<<<<<< HEAD
 		<title><?=$core->page['title']?></title>
-=======
-		<title><?=$app->page_title()?></title>
->>>>>>> 02af42f2597ae8793e912ad9c3746da8e75bd75d
   		<base href="<?=SERVER_NAME?>">
 	</head>
 	<body>
