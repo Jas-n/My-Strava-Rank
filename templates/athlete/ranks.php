@@ -1,41 +1,31 @@
-<div class="story">
+<div class="full">
 	<h2>Ranks</h2>
-	<h3>Distance</h3>
-	<table class="ranks table table-sm">
-		<thead>
-			<tr>
-				<th>Rank</th>
-				<th>Name</th>
-				<th>Distance</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="me">
-				<td>[RANK]</td>
-				<td><?=$athlete->username?></td>
-				<td>[DISTANCE]</td>
-			</tr>
-		</tbody>
-	</table>
-	<h3>Altitude</h3>
-	<table class="ranks table table-sm">
-		<thead>
-			<tr>
-				<th>Rank</th>
-				<th>Name</th>
-				<th>Elevation</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="me">
-				<td>[RANK]</td>
-				<td><?=$athlete->username?></td>
-				<td>[ELEVATION]</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-<div class="graphic">
-	// Current Ranks with progression
-	<?php print_pre($athlete->ranks); ?>
+	<div class="cols-md-2">
+		<?php if($athlete->ranks){
+			foreach($athlete->ranks as $name=>$ranks){ ?>
+				<div class="rank">
+					<h3><?=$name?></h3>
+					<table class="ranks table table-sm">
+						<thead>
+							<tr>
+								<th>Rank</th>
+								<th>Name</th>
+								<th>Distance</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach($ranks as $i=>$rank){
+								$is_me=$athlete->hex_id==$rank['hex_id']; ?>
+								<tr<?=$is_me?' class="me"':''?>>
+									<td><?=number_format($rank['rank'])?></td>
+									<td><?=(!$is_me?'<a href="/athlete/'.$rank['hex_id'].'" alt="'.$rank['name'].'">':'').$rank['name'].(!$is_me?'</a>':'')?></a></td>
+									<td><?=number_format($rank['count'])?></td>
+								</tr>
+							<?php } ?>
+						</tbody>
+					</table>
+				</div>
+			<?php }
+		} ?>
+	</div>
 </div>

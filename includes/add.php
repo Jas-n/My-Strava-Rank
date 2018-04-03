@@ -30,7 +30,7 @@
 				DATE_TIME,
 				DATE_TIME,
 				1,
-				1
+				0
 			)
 		);
 		$athlete_id=$db->insert_id();

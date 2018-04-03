@@ -3,6 +3,7 @@ $namespace=array(
 	'company'=>'Jasn',
 	'project'=>'MSR'
 );
+error_reporting(E_ALL & ~E_NOTICE);
 require_once(__DIR__.'/core/init.php');
 /* Append new query string to _GET */
 if(!defined('ROOT')){

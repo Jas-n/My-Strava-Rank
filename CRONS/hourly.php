@@ -2,6 +2,7 @@
 	'php.Jasn\MSR\athletes',
 	'php.Jasn\MSR\clubs'
 );
+error_reporting(E_ALL & ~E_NOTICE);
 require(__DIR__.'/../init.php');
 require_once(CORE.'cron.php');
 if(in_array($hour,array(0,6,12,18))){
