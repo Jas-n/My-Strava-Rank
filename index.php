@@ -26,8 +26,8 @@ if($_GET['file']=='add'){
 					<li class="nav-item"><a class="nav-link js-load athletes">Athletes</a></li>
 					<!--li class="nav-item"><a class="nav-link js-load clubs">Clubs</a></li>
 					<li class="nav-item"><a class="nav-link js-load locations">Locations</a></li>
-					<li class="nav-item"><a class="nav-link js-load community">Community</a></li>
-					<li class="nav-item"><a class="nav-link js-load login">Login</a></li-->
+					<li class="nav-item"><a class="nav-link js-load community">Community</a></li-->
+					<li class="nav-item"><a class="nav-link js-load login">Login</a></li>
 					<li class="nav-item"><a class="nav-link" data-link="<?=$strava->authenticationUrl(SERVER_NAME.'add','auto');?>">Add Rank</a></li>
 				</ul>
 			</div>
