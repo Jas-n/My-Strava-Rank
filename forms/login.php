@@ -1,7 +1,10 @@
 <?php use Formation\Core\Form;
 class login extends form{
 	public function __construct($data=NULL){
-		parent::__construct('name='.__CLASS__);
+		parent::__construct(array(
+			'name'=>__CLASS__,
+			'action'=>'do-login'
+		));
 		parent::add_field(array(
 			'label'			=>'Email',
 			'name'			=>'email',
@@ -24,7 +27,7 @@ class login extends form{
 				'type'	=>'submit',
 				'value'	=>'Login'
 			));
-			parent::add_html('<a class="btn btn-sm btn-white btn-forgot_password" href="./forgot">Reset Password</a>
+			parent::add_html('<a class="btn btn-sm btn-white js-load forgot">Reset Password</a>
 		</div>');
 	}
 }

@@ -25,7 +25,6 @@ $user		=new user();
 $page		=new page();
 $strava		=new strava(10772,'859a748ef3bced2da0cd73fb7be567d91037a2a3');
 if($app_require){
-	print_pre($app_require);
 	$app->require=$app_require;
 	$require=array_map('strtolower',$app->require);
 	$form_included=false;
