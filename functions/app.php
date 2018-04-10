@@ -144,6 +144,142 @@ function elevation_like($miles){
 		'complete'	=>round(($meters/$mountain_height-floor($meters/$mountain_height))*100,2)
 	);
 }
+# Sends out HTML Email (Requires PHPMailer: https://github.com/PHPMailer/PHPMailer)
+# Updated 02/11/2017 12:51
+function email($to,$title,$description,$content,$attachments=NULL,$from=NULL,$delivery=NULL,$read=NULL){
+	global $core;
+	if(!is_array($to)){
+		if(strpos($to,',')!==false){
+			$to=explode(',',$to);
+		}else{
+			$to=array($to);
+		}
+	}
+	foreach($to as $t){
+		if(!validate_email($t)){
+			$core->set_message('Error','Unable to send email(s), address is not valid: '.$t);
+			return false;
+		}
+	}
+	if(is_file(ROOT.'images/logos/150.png')){
+		$logo='<img alt="'.SITE_NAME.'" src="'.SERVER_NAME.'images/logos/150.png" style="max-width:600px;text-align:center;" id="headerImage">';
+	}else{
+		$logo=SITE_NAME;
+	}
+	$fields=array(
+		'{{{TITLE}}}',
+		'{{{DESCRIPTION}}}',
+		'{{{LOGO}}}',
+		'{{{CONTENT}}}',
+		'{{{IF TWITTER}}}',
+		'{{{TWITTER}}}',
+		'{{{ENDIF TWITTER}}}',
+		'{{{IF FACEBOOK}}}',
+		'{{{FACEBOOK}}}',
+		'{{{ENDIF FACEBOOK}}}',
+		'{{{YEAR}}}',
+		'{{{SITE NAME}}}',
+		'{{{COMPANY NAME}}}',
+		'{{{COMPANY ADDRESS}}}',
+		'{{{LOGIN URL}}}'
+	);
+	$data=array(
+		$title,
+		$description,
+		$logo,
+		$content,
+		defined('TWITTER')?'':'<!--',
+		TWITTER,
+		defined('TWITTER')?'':'-->',
+		defined('FACEBOOK')?'':'<!--',
+		FACEBOOK,
+		defined('FACEBOOK')?'':'-->',
+		date('Y'),
+		SITE_NAME,
+		COMPANY_NAME,
+		defined('COMPANY_ADDRESS')?COMPANY_ADDRESS:'',
+		SERVER_NAME.'/login'
+	);
+	$template=ROOT.'themes/'.THEME.'/emails/base.html';
+	if(!is_file($template)){
+		$template=ROOT.'emails/base.html';
+	}
+	$html=str_replace($fields,$data,file_get_contents($template));
+	$template=ROOT.'themes/'.THEME.'/emails/base.txt';
+	if(!is_file($template)){
+		$template=ROOT.'emails/base.txt';
+	}
+	$txt=strip_tags(str_replace($fields,$data,file_get_contents($template)));
+	# Include PHPMailer
+	include_once(ROOT.'libraries/phpmailer.php');
+	$emailer=new PHPMailer();
+	$emailer->isHTML(true);
+	$emailer->MsgHTML($html);
+	$emailer->AltBody=$txt;
+	if(validate_email($delivery)){
+		$emailer->AddCustomHeader("Return-receipt-to:".$delivery);
+	}
+	if(validate_email($read)){
+		$emailer->ConfirmReadingTo=$read;
+	}
+	if($from){
+		$from=$emailer->parseAddresses($from);
+		if($from[0]){
+			$emailer->setFrom($from[0]['address'],$from[0]['name']);
+		}
+	}else{
+		$emailer->setFrom(SITE_EMAIL,SITE_NAME);
+	}
+	$emailer->Subject=$title;
+	foreach($to as $t){
+		$emailer->addAddress(trim($t));
+	}
+	if($attachments!==NULL){
+		if(!is_array($attachments)){
+			$attachments=array($attachments);
+		}
+		foreach($attachments as &$attachment){
+			if(is_file($attachment)){
+				$emailer->addAttachment($attachment);
+			}elseif(is_file(ROOT.$attachment)){
+				$emailer->addAttachment(ROOT.$attachment);
+			}
+		}
+	}
+	if($emailer->Send()){
+		return array(
+			'status'=>true,
+			'data'	=>array(
+				'to'			=>$to,
+				'title'			=>$title,
+				'description'	=>$description,
+				'content'		=>$content,
+				'from'			=>$from
+			)
+		);
+	}else{
+		$core->set_message('error',"Error sending Email");
+		$core->log_message(1,
+			'Error Sending Email',
+			$emailer->ErrorInfo,
+			array(
+				'args'	=>func_get_args(),
+				'trace'	=>debug()
+			)
+		);
+		return array(
+			'status'=>false,
+			'message'=>$emailer->ErrorInfo,
+			'data'	=>array(
+				'to'			=>$to,
+				'title'			=>$title,
+				'description'	=>$description,
+				'content'		=>$content,
+				'from'			=>$from
+			)
+		);
+	}
+}
 # Checks if a user is logged in
 function is_logged_in(){
 	return !!($_SESSION['user_id']);

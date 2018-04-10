@@ -42,7 +42,7 @@ class forgot extends form{
 			<div>');
 				parent::add_button(array(
 					'class'	=>'btn-primary',
-					'name'	=>'login',
+					'name'	=>'reset',
 					'type'	=>'submit',
 					'value'	=>'Reset'
 				));

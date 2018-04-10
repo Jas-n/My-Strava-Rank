@@ -269,45 +269,37 @@
 		}
 	}
 	public function reset_password($users){
-		global $core,$db,$user;
+		global $core,$app,$db,$user;
 		if(!is_array($users)){
 			$users=array($users);
 		}
 		foreach($users as $usr){
-			$pass=random_text(PASSWORD_STRENGTH);
-			$newpassword=password_hash($pass,PASSWORD_BCRYPT);
-			$db->query(
-				"UPDATE `users`
-				SET
-					`password`=?,
-					`updated`=?
-				WHERE `id`=?",
-				array(
-					$newpassword,
-					DATE_TIME,
-					$usr
-				)
-			);
+			$expiry=date('Y-m-d H:i:s',strtotime('+24 hours'));
+			$token=$app->create_token($usr,NULL,$expiry);
 			$email=$user->get_users_email($usr);
+			$url=SERVER_NAME.'forgot?t='.$token;
 			email(
 				$email,
 				'Password Reset',
 				'Your password has been reset',
-				"<p>The password for your account on <strong>".SITE_NAME."</strong> has been reset, you can now <a href='{{{LOGIN URL}}}' title='Login'>login</a> with the following details:</p>
-				<table border='0' cellspacing='10' cellpadding='0' width='560'>
-					<tr>
-						<td width='20%'><strong>Username:</strong></td>
-						<td width='80%'>".$email."</td>
-					</tr>
-					<tr>
-						<td><strong>Password:</strong></td>
-						<td>".$pass."</td>
-					</tr>
-				</table>"
+				'<p>A password reset has been actioned for your account.</p>
+				<p>Please click the following button to set your new password. This link is valid until <strong>'.sql_datetime($expiry).'</strong></p>
+				<!--[if mso]>
+					<v:rect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="'.$url.'" style="height:40px;v-text-anchor:middle;width:100px;" stroke="f" fillcolor="#0275d8">
+						<w:anchorlock/>
+							<center>
+				<![endif]-->
+				<a href="'.$url.'" style="background-color:#0275d8;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:13px;font-weight:bold;line-height:40px;text-align:center;text-decoration:none;width:100px;-webkit-text-size-adjust:none;">Reset</a>
+				<!--[if mso]>
+						</center>
+					</v:rect>
+				<![endif]-->'
 			);
 		}
-		$core->set_message('success','Successfully reset '.sizeof($users).' users\' passwords');
-		$core->log_message(3,'Reset password(s)','Reset '.sizeof($users).' users\' passwords');
+		if(get_dir()){
+			$core->set_message('success','Successfully reset '.sizeof($users).' users\' passwords');
+		}
+		$core->log_message(3,'Reset password(s)','Reset <strong>'.sizeof($users).'</strong> users\' passwords');
 	}
 	public static function search($term){
 		global $db;

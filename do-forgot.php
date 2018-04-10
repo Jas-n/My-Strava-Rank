@@ -1,11 +1,11 @@
 <?php require_once('init.php');
-if($_POST['t']){
+if($_POST['forgot_t']){
 	# Password reset is valid, now store it
-	if(!$_POST['password_1'] || !$_POST['password_2']){
+	if(!$_POST['forgot_password_1'] || !$_POST['forgot_password_2']){
 		$core->set_message('error','Please complete all password fields to change your password.');
 		header('Location: forgot');
 		exit;
-	}elseif($_POST['password_1'] != $_POST['password_2']){
+	}elseif($_POST['forgot_password_1'] != $_POST['forgot_password_2']){
 		$core->set_message('error',"New Passwords do not match.");
 		header('Location: forgot');
 		exit;
@@ -14,7 +14,7 @@ if($_POST['t']){
 		header('Location: forgot');
 		exit;
 	}else{
-		$password=password_hash($_POST['password_1'],PASSWORD_BCRYPT);
+		$password=password_hash($_POST['forgot_password_1'],PASSWORD_BCRYPT);
 		$db->query(
 			"UPDATE `users`
 			SET
@@ -39,17 +39,17 @@ if($_POST['t']){
 	FROM `users`
 	WHERE `email`=? AND `id` <> ? AND `can_access`=1",
 	array(
-		$_POST['email'],
+		$_POST['forgot_email'],
 		0
 	)
 )){
-	$users->reset_password($usr['id']);
+	$user->reset_password($usr['id']);
 	$core->log_message(3,'Forgot Password','Forgot Password requested and sent by <strong>'.$usr['first_name'].' '.$usr['last_name'].'</strong>');
 	$core->set_message('success','Instructions to reset your password have ben sent to your email address.');
 	header('Location: login');
 	exit;
 }else{
-	$core->log_message(2,'Forgot Password','Password request for unlisted user using email <strong>'.$_POST['email'].'</strong>.');
+	$core->log_message(2,'Forgot Password','Password request for unlisted user using email <strong>'.$_POST['forgot_email'].'</strong>.');
 	$core->set_message('error',"There are no users matching your details.");
 	header('Location: forgot');
 	exit;

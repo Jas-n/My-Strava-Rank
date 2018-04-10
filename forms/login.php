@@ -2,8 +2,8 @@
 class login extends form{
 	public function __construct($data=NULL){
 		parent::__construct(array(
-			'name'=>__CLASS__,
-			'action'=>'do-login'
+			'action'=>'do-login',
+			'name'=>__CLASS__
 		));
 		parent::add_field(array(
 			'label'			=>'Email',
