@@ -2,6 +2,15 @@
 	'form.forgot'
 );
 require_once('init.php');
+if(is_logged_in()){
+	header('Location: /users');
+	exit;
+}elseif($_GET['t']){
+	if(!$password_reset_token=$app->get_token($_GET['t'])){
+		header('Location: '.$_SERVER['REDIRECT_URL']);
+		exit;
+	}
+}
 include_once(CORE.'classes/form.php');
 include_once(ROOT.'forms/forgot.php');
 $forgot=new forgot();

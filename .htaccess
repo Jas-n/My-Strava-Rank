@@ -9,8 +9,17 @@ ErrorDocument 504 /error
 RewriteEngine On
 RewriteBase /
 
+RewriteCond	%{REQUEST_FILENAME} !-f
+RewriteCond	%{REQUEST_FILENAME} !-d
+RewriteRule	^users/([A-Za-z\-_]+)/([A-Z0-9]+)/?$	users/$1\.php?id=$2	[NC,L]
+RewriteRule	^users/([A-Za-z\-_]+)/?$				users/$1\.php		[NC,L]
+RewriteRule	^([A-Za-z\-_]+)/?$						index\.php?page=$1	[NC,L]
+
+
 RewriteCond	%{REQUEST_FILENAME}.php -f
-RewriteRule	^([A-Za-z\-_]+)/?$	$1\.php	[NC,L]
+RewriteRule	^users/([A-Za-z\-_]+)/?$	/users/$1\.php		[NC,L]
+RewriteRule	^users/?$					users/index\.php	[NC,L]
+RewriteRule	^([A-Za-z\-_]+)/?$			$1\.php				[NC,L]
 
 RewriteCond	%{REQUEST_FILENAME} !-f
 RewriteRule ^([A-Za-z\-_]+)/([A-Za-z0-9]+)/?$	index\.php?file=$1&id=$2	[NC,L]

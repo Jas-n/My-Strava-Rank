@@ -1,7 +1,7 @@
 <?php # namespace Formation\Glowt\Forms\;
 use Formation\Core\Form;
 class forgot extends form{
-	public function __construct($data=NULL){
+	public function __construct(){
 		global $password_reset_token;
 		parent::__construct(array(
 			'action'=>'do-forgot',

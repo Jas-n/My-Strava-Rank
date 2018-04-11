@@ -6,33 +6,6 @@ register_shutdown_function(function(){
 		log_errors($error["type"],$error["message"],$error["file"],$error["line"]);
 	}
 });
-# Limit $text to $length (Default 50)
-function crop($text,$length=50){
-	if(strlen($text)>$length){
-		$text=strip_tags(substr($text,0,$length-1)).'&hellip;';
-	}
-	return $text;
-}
-function debug(){
-	$traces=debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-	if(is_array($traces)){
-		$traces=array_slice($traces,1);
-		$key=sizeof($traces);
-		foreach($traces as &$t){
-			$trace[$key]=array(
-				'file'		=>$t['file'],
-				'line'		=>$t['line'],
-				'function'	=>$t['function'].'()'
-			);
-			if($t['args']){
-				$trace[$key]['args']=$t['args'];
-			}
-			$key--;
-		}
-		return $traces;
-	}
-	return $traces;
-}
 function distance_like($miles){
 	if($miles<26.21875){
 		$max=false;

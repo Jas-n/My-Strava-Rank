@@ -9,7 +9,7 @@ if($_POST['forgot_t']){
 		$core->set_message('error',"New Passwords do not match.");
 		header('Location: forgot');
 		exit;
-	}elseif(strlen($_POST['password_1'])<PASSWORD_STRENGTH){
+	}elseif(strlen($_POST['forgot_password_1'])<PASSWORD_STRENGTH){
 		$core->set_message('error',"New password must be at least ".PASSWORD_STRENGTH." characters long.");
 		header('Location: forgot');
 		exit;
