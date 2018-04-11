@@ -16,6 +16,7 @@ RewriteRule	^users/([A-Za-z\-_]+)/?$				users/$1\.php		[NC,L]
 RewriteRule	^([A-Za-z\-_]+)/?$						index\.php?page=$1	[NC,L]
 
 
+
 RewriteCond	%{REQUEST_FILENAME}.php -f
 RewriteRule	^users/([A-Za-z\-_]+)/?$	/users/$1\.php		[NC,L]
 RewriteRule	^users/?$					users/index\.php	[NC,L]
