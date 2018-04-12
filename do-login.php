@@ -1,8 +1,11 @@
-<?php require_once('init.php');
+<?php echo __LINE__.'<br>';
+require_once('init.php');
+line();
 if(!$_POST || $_POST['form_name']!='login'){
 	header('Location: /login');
 	exit;
 }
+line();
 if($password=$db->get_row(
 	"SELECT
 		`id`,`role_id`,`can_access`,`first_name`,`last_name`,`password`
@@ -10,7 +13,9 @@ if($password=$db->get_row(
 	WHERE `email`=?",
 	$_POST['login_login']
 )){
+	line();
 	if(!$password['can_access']){
+		line();
 		$_SESSION['failed_logins']['count']++;
 		$_SESSION['failed_logins']['last_try']=time();
 		$core->log_message(2,'Failed Login','User does not have access <strong>'.$password['first_name'].' '.$password['last_name'].'</strong>.');
@@ -18,6 +23,7 @@ if($password=$db->get_row(
 		header('Location: /login');
 		exit;
 	}elseif(!password_verify($_POST['login_password'],$password['password'])){
+		line();
 		$_SESSION['failed_logins']['count']++;
 		$_SESSION['failed_logins']['last_try']=time();
 		$core->log_message(2,'Failed Login','Incorrect password supplied for <strong>'.$password['first_name'].' '.$password['last_name'].'</strong>.');
@@ -25,6 +31,7 @@ if($password=$db->get_row(
 		header('Location: /login');
 		exit;
 	}elseif($password['role_id']==5 && (!$app->get_module_id('clients') || !defined('CLIENTS_ACCESS') || !$db->get_value("SELECT `active` FROM `modules` WHERE `id`=?",$app->get_module_id('clients')))){
+		line();
 		$_SESSION['failed_logins']['count']++;
 		$_SESSION['failed_logins']['last_try']=time();
 		$core->log_message(2,'Failed Login','Clients module is no longer enabled.');
@@ -32,22 +39,12 @@ if($password=$db->get_row(
 		header('Location: /login');
 		exit;
 	}else{
+		line();
 		$_SESSION['user_id']=$password['id'];
 		$_SESSION['roles'][$password['role_id']]=$password['role'];
-		if($roles=$db->query(
-			"SELECT `roles`.`id`,`roles`.`role`
-			FROM `roles`
-			INNER JOIN `user_roles`
-			ON `roles`.`id`=`user_roles`.`role_id`
-			WHERE `user_roles`.`user_id`=?",
-			$password['id']
-		)){
-			foreach($roles as $role){
-				$_SESSION['roles'][$role['id']]=$role['role'];
-			}
-		}
 		$updates['last_login']=DATE_TIME;
 		if(!$password['role']){
+			line();
 			$core->log_message(1,'Role Reassign','Could not find role so reassigned as "user"');
 			$db->query(
 				"UPDATE `users`
@@ -56,6 +53,7 @@ if($password=$db->get_row(
 				$password['id']
 			);
 		}
+		line();
 		$db->query(
 			"UPDATE `users`
 			SET `last_login`=?
@@ -66,8 +64,10 @@ if($password=$db->get_row(
 			)
 		);
 		if($_GET['url']){
+			line();
 			header('Location: '.$_GET['url']);
 		}elseif(!$_GET['url']){
+			line();
 			header('Location: users');
 		}
 		exit;

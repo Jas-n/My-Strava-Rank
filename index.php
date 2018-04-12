@@ -1,4 +1,5 @@
-<?php include('init.php');
+<?php include_once('init.php');
+print_pre($_GET);
 if($_GET['file']=='add'){
 	include(ROOT.'includes/add.php');
 	exit;
