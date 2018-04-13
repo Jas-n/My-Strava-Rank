@@ -14,12 +14,12 @@ RewriteBase /
 
 
 # Old MSR
-RewriteCond	%{REQUEST_FILENAME}.php -f
-RewriteRule	^([A-Za-z\-_]+)/?$	$1\.php	[NC,L]
+#RewriteCond	%{REQUEST_FILENAME}.php -f
+#RewriteRule	^([A-Za-z\-_]+)/?$	$1\.php	[NC,L]
 
-RewriteCond	%{REQUEST_FILENAME} !-f
-RewriteRule ^([A-Za-z\-_]+)/([A-Za-z0-9]+)/?$	index\.php?file=$1&id=$2	[NC,L]
-RewriteRule	^([A-Za-z\-_]+)/?$					index\.php?file=$1			[NC,L]
+#RewriteCond	%{REQUEST_FILENAME} !-f
+#RewriteRule ^([A-Za-z\-_]+)/([A-Za-z0-9]+)/?$	index\.php?file=$1&id=$2	[NC,L]
+#RewriteRule	^([A-Za-z\-_]+)/?$					index\.php?file=$1			[NC,L]
 
 
 
