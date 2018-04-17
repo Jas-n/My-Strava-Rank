@@ -9,36 +9,15 @@ ErrorDocument 504 /error
 RewriteEngine On
 RewriteBase /
 
-# New MSR
+RewriteCond %{REQUEST_FILENAME}.php !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule	^([A-Za-z\-_]+)/?$	index\.php?file=$1	[NC,L]
 
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule	^users/([A-Za-z\-_]+)/?$	users/$1\.php		[NC,L]
+RewriteRule	^users/?$					users/index\.php	[NC,L]
+RewriteRule	^([A-Za-z\-_]+)/?$			$1\.php				[NC,L]
 
-
-# Old MSR
-#RewriteCond	%{REQUEST_FILENAME}.php -f
-#RewriteRule	^([A-Za-z\-_]+)/?$	$1\.php	[NC,L]
-
-#RewriteCond	%{REQUEST_FILENAME} !-f
-#RewriteRule ^([A-Za-z\-_]+)/([A-Za-z0-9]+)/?$	index\.php?file=$1&id=$2	[NC,L]
-#RewriteRule	^([A-Za-z\-_]+)/?$					index\.php?file=$1			[NC,L]
-
-
-
-# Glowt
-#RewriteCond %{REQUEST_FILENAME}.php !-f
-#RewriteCond %{REQUEST_FILENAME} !-d
-#RewriteRule	^([A-Za-z\-_]+)/?$								page\.php?slug=$1					[NC,L]
-#
-#RewriteCond %{REQUEST_FILENAME}.php -f
-#RewriteRule	^users/([A-Za-z\-_]+)/?$						users/$1\.php		[NC,L]
-#RewriteRule	^users/?$										users/index\.php	[NC,L]
-#RewriteRule	^([A-Za-z\-_]+)/?$								$1\.php				[NC,L]
-#
-#RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteCond %{REQUEST_FILENAME} !-d
-#RewriteRule	^api/([A-Za-z0-9]+)/module/([A-Za-z\-_]+)/([A-Za-z\-_]+)?$		api/module\.php?api_key=$1&module=$2&method=$3	[NC,L]
-#RewriteRule	^api/([A-Za-z0-9]+)/([A-Za-z\-_]+)?$					api/$2\.php?api_key=$1			[NC,L]
-#RewriteRule	^api/([A-Za-z0-9]+)/([A-Za-z\-_]+)/([0-9A-Za-z\-_]+)?$	api/$2\.php?api_key=$1&id=$3	[NC,L]
-#RewriteRule	^users/([A-Za-z\-_]+)/([A-Za-z\-_]+)/([A-Z0-9\-]+)/?$ 	users/module\.php?module=$1&file=$2&id=$3 [NC,L]
-#RewriteRule	^users/([A-Za-z\-_]+)/([A-Za-z\-_]+)/?$					users/module\.php?module=$1&file=$2	[NC,L]
-#RewriteRule	^users/([A-Za-z\-_]+)/?$								users/module\.php?module=$1			[NC,L]
-#RewriteRule	^users/([A-Za-z\-_]+)/([A-Z0-9\-]+)/?$					users/$1\.php?id=$2					[NC,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule	^users/([A-Za-z\-_]+)/([A-Z0-9\-]+)/?$	users/$1\.php?id=$2	[NC,L]

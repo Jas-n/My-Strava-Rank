@@ -11,6 +11,10 @@
 				"extensionName": ".css",
 				"savePath": "~/../css/"
 			}
+		],
+		"cSpell.words": [
+			"msr",
+			"strava"
 		]
 	}
 }
