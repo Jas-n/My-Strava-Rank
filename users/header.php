@@ -2,6 +2,10 @@
 	'Dashboard'=>array(
 		'href'=>'./',
 		'icon'=>'tachometer'
+	),
+	'Athletes'=>array(
+		'href'=>'athletes',
+		'icon'=>'male'
 	)
 ); ?>
 <!doctype html>
@@ -49,3 +53,22 @@
 			</div>
 		</header>
 		<main class="default">
+			<h1><?=$h1.($h1_small?' <small class="text-muted">'.$h1_small.'</small>':'')?></h1>
+			<ul class="breadcrumb">
+				<li class="breadcrumb-item<?=$page->slug=='users/index'?' active':''?>"><a href="./">Dashboard</a></li>
+				<?php if($breadcrumb){
+					end($breadcrumb);
+					$last=key($breadcrumb);
+					foreach($breadcrumb as $link=>$title){?>
+						<li class="breadcrumb-item<?=$link==last?' active':''?>">
+							<?php if(!is_numeric($link)){ ?>
+								<a href="<?=$link?>">
+							<?php }
+							echo $title;
+							if(!is_numeric($link)){ ?>
+								</a>
+							<?php }?>
+						</li>
+					<?php }
+				} ?>
+			</ul>
