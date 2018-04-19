@@ -135,19 +135,11 @@
 	public function get_user($user_id,$loaders=NULL){
 		global $addresses,$app,$db;
 		if($temp=$db->get_row(
-			'SELECT
-				`users`.*,CONCAT(`users`.`first_name`," ",`users`.`last_name`) as `name`,
-				`roles`.`role`
+			'SELECT `users`.*,CONCAT(`users`.`first_name`," ",`users`.`last_name`) as `name`
 			FROM `users`
-			LEFT JOIN `roles`
-			ON `users`.`role_id`=`roles`.`id`
 			WHERE `users`.`id`=?',
 			$user_id
 		)){
-			if(!$temp['role']){
-				$this->update_user(array('role_id'=>4),$user_id);
-			}
-			$temp['roles'][$temp['role_id']]=$temp['role'];
 			if(is_file(ROOT.'uploads/users/'.$user_id.'/cover.html')){
 				$temp['cover']=file_get_contents(ROOT.'uploads/users/'.$user_id.'/cover.html');
 			}

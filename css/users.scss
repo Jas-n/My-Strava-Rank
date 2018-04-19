@@ -4,6 +4,13 @@
 $header:	70px;
 $menu_width:200px;
 $mobile_nav:30px;
+a{
+	&.card{
+		&:hover{
+			text-decoration: none;
+		}
+	}
+}
 body{
 	> .print_pre{
 		margin-left:$header;

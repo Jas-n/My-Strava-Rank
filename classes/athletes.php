@@ -111,8 +111,8 @@ class athletes{
 				) as `next_rank_points`
 			FROM `athletes`
 			".$where."
-			".$order_s."
-			LIMIT ".($_GET['page']?(($_GET['page']-1)*ITEMS_PER_PAGE):0).','.ITEMS_PER_PAGE,
+			".$order_s.
+			SQL_LIMIT,
 			$options
 		)){
 			foreach($athletes as &$athlete){

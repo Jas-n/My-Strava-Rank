@@ -2,8 +2,8 @@
     "version": 3,
     "mappings": "",
     "sources": [
-        "../scss/app.scss",
-        "../scss/_variables.scss",
+        "app.scss",
+        "_variables.scss",
         "../../- Software/- Core/css/_formation.scss",
         "../../- Software/- Core/css/_variables.scss",
         "../../- Software/- Core/css/_mixins.scss",
