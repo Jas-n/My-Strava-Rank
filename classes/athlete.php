@@ -6,6 +6,11 @@ class athlete extends athletes{
 			foreach($athlete as $key=>$value){
 				$this->$key=$value;
 			}
+			$this->name			=$this->first_name.' '.$this->last_name;
+			$this->initial_name	=$this->first_name.' '.substr($this->last_name,0,1);
+			if(!$this->username){
+				$this->username=$this->initial_name;
+			}
 			$this->favourite_activity=array(
 				'count'=>0,
 				'activity'=>''

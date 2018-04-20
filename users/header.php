@@ -1,4 +1,8 @@
 <?php $nav=array(
+	'Home'=>array(
+		'href'=>'../',
+		'icon'=>'home'
+	),
 	'Dashboard'=>array(
 		'href'=>'./',
 		'icon'=>'tachometer'

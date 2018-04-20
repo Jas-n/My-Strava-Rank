@@ -6,8 +6,8 @@ error_reporting(E_ALL & ~E_NOTICE);
 require(__DIR__.'/../init.php');
 require_once(CORE.'cron.php');
 if(in_array($hour,array(0,6,12,18))){
-	# Collate data for 50 lowest `updatees`
-	if($athletes_=$db->query("SELECT * FROM `athletes` ORDER BY `updates` ASC LIMIT 1")){ # Limit 50
+	# Collate data for 50 lowest `updates`
+	if($athletes_=$db->query("SELECT * FROM `athletes` ORDER BY `updates` ASC, `points` DESC LIMIT 1")){ # Limit 50
 		foreach($athletes_ as $athlete){
 			$strava->setAccessToken($athlete['access_token']);
 			$data=$strava->get('athletes/'.$athlete['strava_id'].'/stats');

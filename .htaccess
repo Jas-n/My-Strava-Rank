@@ -11,7 +11,8 @@ RewriteBase /
 
 RewriteCond %{REQUEST_FILENAME}.php !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule	^([A-Za-z\-_]+)/?$	index\.php?file=$1	[NC,L]
+RewriteRule	^([A-Za-z\-_]+)/?$					index\.php?file=$1			[NC,L]
+RewriteRule	^([A-Za-z\-_]+)/([A-Za-z0-9\-]+)/?$	index\.php?file=$1&id=$2	[NC,L]
 
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule	^users/([A-Za-z\-_]+)/?$	users/$1\.php		[NC,L]

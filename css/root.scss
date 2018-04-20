@@ -119,9 +119,6 @@ section{
 	&.athletes{
 		background-image: url(../images/nav/athlete.jpg);
 	}
-	.clubs{
-		background-image: url(../images/nav/club.jpg);
-	}
 	&.community{
 		background-image: url(../images/nav/community.jpg);
 	}
@@ -171,6 +168,11 @@ main{
 				flex:0 0 50%;
 				max-width:50%;
 			}
+		}
+	}
+	&.index{
+		.clubs{
+			background-image: url(../images/nav/club.jpg);
 		}
 	}
 	&.forgot,
