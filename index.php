@@ -21,13 +21,17 @@ if($_GET['file']=='add'){
 				<?=file_get_contents(ROOT.'images/bars.svg')?>
   			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<a class="active js-load index">Home<span class="sr-only"> (current)</span></a>
-				<a class="js-load athletes">Athletes</a>
-				<!--a class="js-load clubs">Clubs</a>
-				<a class="js-load locations">Locations</a>
-				<a class="js-load community">Community</a-->
-				<a class="js-load login">Login</a>
-				<a data-link="<?=$strava->authenticationUrl(SERVER_NAME.'add','auto');?>">Add Rank</a>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active"><a class="nav-link js-load index">Home<span class="sr-only"> (current)</span></a>
+					<li class="nav-item"><a class="nav-link js-load athletes">Athletes</a></li>
+					<?php if(is_logged_in()){ ?>
+						<li class="nav-item"><a class="nav-link js-load clubs">Clubs</a></li>
+					<?php } ?>
+					<!--li class="nav-item"><a class="nav-link js-load locations">Locations</a></li>
+					<li class="nav-item"><a class="nav-link js-load community">Community</a></li-->
+					<li class="nav-item"><a class="nav-link js-load login">Login</a></li>
+					<li class="nav-item"><a class="nav-link" data-link="<?=$strava->authenticationUrl(SERVER_NAME.'add','auto');?>">Add Rank</a></li>
+				</ul>
 			</div>
 		</nav>
 		<main class="<?=$_GET['file']?>">

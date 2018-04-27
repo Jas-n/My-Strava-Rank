@@ -171,9 +171,11 @@ main{
 		}
 	}
 	&.index{
-		.clubs{
-			background-image: url(../images/nav/club.jpg);
-		}
+		background-position: center center;
+	}
+	&.index .clubs,
+	&.clubs{
+		background-image: url(../images/nav/club.jpg);
 	}
 	&.forgot,
 	&.login{
@@ -187,12 +189,15 @@ main{
 	padding:0;
 	&-light{
 		.navbar{
-			&-brand,
-			&-nav .nav-link.active{
-				color:$orange;
-			}
 			&-brand{
+				color:$orange;
 				&:hover{
+					color:$orange;
+				}
+			}
+			&-nav{
+				.active > .nav-link,
+				.nav-link:hover{
 					color:$orange;
 				}
 			}

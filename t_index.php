@@ -6,11 +6,13 @@ require('t_header.php');?>
 		<h2>Athletes</h2>
 		<div class="container-fluid"></div>
 	</section>
-	<!--section class="js-load clubs">
-		<h2>Clubs</h2>
-		<div class="container-fluid"></div>
-	</section>
-	<section class="js-load locations">
+	<?php if(is_logged_in()){ ?>
+		<section class="js-load clubs">
+			<h2>Clubs</h2>
+			<div class="container-fluid"></div>
+		</section>
+	<?php } ?>
+	<!--section class="js-load locations">
 		<h2>Locations</h2>
 		<div class="container-fluid"></div>
 	</section>
