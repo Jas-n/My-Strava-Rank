@@ -24,7 +24,7 @@
 				}
 				if($access=$db->get_row("SELECT `".implode('`,`',array_keys($a_cols))."` FROM `page_access` WHERE `page_id`=?",$this->id)){
 					foreach($access as $key=>$a){
-						$this->all_permissions[substr($key,strlen('role_'))]=json_decode($a,1);
+						$this->all_permissions[substr($key,strlen('role_'))]=jason_decode($a);
 					}
 				}
 				$this->permissions=$this->all_permissions[$user->role_id];
@@ -139,7 +139,7 @@
 				);
 				if($access=$db->query("SELECT `".implode('`,`',array_keys($a_cols))."` FROM `page_access` WHERE `page_id`=? LIMIT 1",$page['id'])){
 					foreach($access[0] as $key=>$a){
-						$page['permissions'][substr($key,strlen('role_'))]=json_decode($a,1);
+						$page['permissions'][substr($key,strlen('role_'))]=jason_decode($a);
 					}
 				}
 			}
@@ -174,7 +174,7 @@
 		)){
 			foreach($perms as $perm){
 				$perm['path']=substr($perm['path'],0,strpos($perm['path'],'.php'));
-				$this->permissions_list[$perm['path']]=json_decode($perm['role_'.$user->role_id],1);
+				$this->permissions_list[$perm['path']]=jason_decode($perm['role_'.$user->role_id]);
 			}
 			return $this->permissions_list;
 		}

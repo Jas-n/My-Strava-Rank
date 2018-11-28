@@ -101,35 +101,4 @@ class app{
 		# Return Minified CSS
 		return $css;
 	}
-	# Tokens
-	public function create_token($user_id=0,$data=NULL,$expiry=NULL){
-		global $db;
-		$token=$db->next_hex_id('tokens','token');
-		$db->query(
-			"INSERT INTO `tokens` (
-				`user_id`,`token`,`data`,`added`,`expiry`
-			) VALUES (?,?,?,?,?)",
-			array(
-				$user_id,
-				$token,
-				$data!==NULL?json_encode($data):'',
-				DATE_TIME,
-				date('Y-m-d H:i:s',strtotime($expiry)?strtotime($expiry):strtotime('+ '.MONTH_LENGTH.' days'))
-			)
-		);
-		return $token;
-	}
-	public function expire_token($token){
-		global $db;
-		$db->query("UPDATE `tokens` SET `expiry`=? WHERE `token`=?",array(DATE_TIME,$token));
-		return true;
-	}
-	public function get_token($token){
-		global $db;
-		$data=$db->get_row("SELECT * FROM `tokens` WHERE `token`=? AND `expiry`>?",array($token,DATE_TIME));
-		if($data['data']){
-			$data['data']=json_decode($data['data'],1);
-		}
-		return $data;
-	}
 }

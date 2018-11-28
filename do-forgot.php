@@ -27,7 +27,7 @@ if($_POST['forgot_t']){
 				$password_reset_token['user_id']
 			)
 		);
-		$app->expire_token($_GET['t']);
+		$core->expire_token($_GET['t']);
 		$core->log_message(3,'Forgot Password','Password successfully reset for \''.$usr[0]['first_name'].' '.$usr[0]['last_name'].'\'');
 		$core->set_message('success','You can now log in with your new password.');
 		$_SESSION['user_id']=$password_reset_token['user_id'];

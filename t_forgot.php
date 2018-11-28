@@ -6,7 +6,7 @@ if(is_logged_in()){
 	header('Location: /users');
 	exit;
 }elseif($_GET['t']){
-	if(!$password_reset_token=$app->get_token($_GET['t'])){
+	if(!$password_reset_token=$core->get_token($_GET['t'])){
 		header('Location: '.$_SERVER['REDIRECT_URL']);
 		exit;
 	}

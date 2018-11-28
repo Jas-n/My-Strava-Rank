@@ -321,7 +321,7 @@
 					'ID'		=>$user['id'],
 					'Name'		=>$user['name'],
 					'Role'		=>$user['role'],
-					'Actions'	=>'<a class="btn btn-primary btn-sm" href="user?id='.$user['id'].'" title="View '.$user['name'].'">View</a> <a class="btn btn-secondary btn-sm" href="mailto:'.$user['email'].'" title="Email '.$user['name'].'">Email</a>'
+					'Actions'	=>'<a class="btn btn-primary" href="user?id='.$user['id'].'" title="View '.$user['name'].'">View</a> <a class="btn btn-secondary" href="mailto:'.$user['email'].'" title="Email '.$user['name'].'">Email</a>'
 				);
 			}
 		}
@@ -441,7 +441,7 @@
 					'required'	=>1,
 					'value'		=>$user['title']
 				),
-				json_decode(TITLES,1),
+				jason_decode(TITLES),
 				'Select&hellip;'
 			);
 			$form->add_fields(array(

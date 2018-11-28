@@ -27,7 +27,7 @@ class login extends form{
 				'type'	=>'submit',
 				'value'	=>'Login'
 			));
-			parent::add_html('<a class="btn btn-sm btn-white js-load forgot">Reset Password</a>
+			parent::add_html('<a class="btn btn-white js-load forgot">Reset Password</a>
 		</div>');
 	}
 }

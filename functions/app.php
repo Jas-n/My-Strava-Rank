@@ -253,10 +253,6 @@ function email($to,$title,$description,$content,$attachments=NULL,$from=NULL,$de
 		);
 	}
 }
-# Checks if a user is logged in
-function is_logged_in(){
-	return !!($_SESSION['user_id']);
-}
 function log_errors($severity,$message,$file,$line,array $context=NULL){
 	global $db;
 	if(isset($db)){
@@ -265,32 +261,6 @@ function log_errors($severity,$message,$file,$line,array $context=NULL){
 		restore_error_handler();
 	}
 	return true;
-}
-# Returns a date reformated fron SQL
-# Updated 29/03/2017 21:29
-function sql_date($date_from_sql){
-	if(!is_numeric($date_from_sql)){
-		$time=strtotime($date_from_sql);
-	}else{
-		$time=$date_from_sql;
-	}
-	if($time<=0){
-		return false;
-	}
-	return date(DATE_FORMAT,$time);
-}
-# Returns a date and time reformated from SQL
-# Updated 29/03/2017 21:25
-function sql_datetime($datetime_from_sql){
-	if(!is_numeric($datetime_from_sql)){
-		$time=strtotime($datetime_from_sql);
-	}else{
-		$time=$datetime_from_sql;
-	}
-	if($time<=0){
-		return false;
-	}
-	return sql_date($datetime_from_sql).' at '.date(TIME_FORMAT,$time);
 }
 function date_difference($from,$to){
 	$from	=date_create($from);
