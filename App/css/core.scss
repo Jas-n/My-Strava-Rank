@@ -1,0 +1,152 @@
+@import "app";
+@import "bootstrap/bootstrap";
+@import "fontawesome/fontawesome";
+@import "fontawesome/brands";
+@import "fontawesome/light";
+/*!
+ * App Core Styles
+*/
+:root{
+	--border-color:$primary;
+}
+[data-load]{
+	cursor:pointer;
+}
+.hero{
+	background-position:top;
+	object-fit: cover;
+	clip-path: polygon(0 0, 100% 0, 100% 66%, 0% 100%);
+	height:40vh;
+	position:fixed;
+	width:100%;
+	z-index:-1;
+}
+.breadcrumb{
+	[data-load]{
+		color:var(--border-color);
+	}
+	.active{
+		cursor:default;
+	}
+}
+.card,
+.table{
+	background:#021F59;
+	border-top:3px solid var(--border-color) !important;
+	color:$white !important;
+	margin-bottom:$spacer/2;
+}
+.card{
+	display:block;
+	padding:$spacer/2;
+	&.icon{
+		text-align:center;
+		i{
+			display:block;
+			font-size:$spacer*2.5;
+			margin-bottom:$spacer*.25;
+			padding:$spacer*.25 0;
+		}
+	}
+	&.js-login{
+		background-position:center;
+		background-size:cover;
+		font-weight:500;
+		padding:$spacer*6 0;
+		&[data-id="1"]{
+			background-image: url('../images/charlotte.jpeg');
+			border-top:3px solid var(--border-color) !important; 
+			color:$purple !important;
+		}
+		&[data-id="2"]{
+			background-image: url('../images/jason.jpeg');
+			border-top:3px solid var(--border-color) !important;
+			color:$blue !important;
+		}
+		span{
+			background:rgba(255,255,255,.33);
+			padding:0 $spacer/2;
+		}
+	}
+}
+footer{
+	color:$gray-600;
+	background:$white;
+	bottom:0;
+	position:fixed;
+	width: 100%;
+	height:$footer-height;
+	text-align:center;
+	margin-left:0 !important;
+	margin-right:0 !important;
+	.col{
+		color:$white;
+		cursor: pointer;
+		font-size:$spacer*1.5;
+		height: 100%;
+		padding:5px;
+		&.active,
+		&:hover{
+			color:$primary !important;
+		}
+		i{
+			display:block;
+			font-size:$spacer*2;
+		}
+	}
+}
+h1,
+h2{
+	color:$white;
+	font-weight:normal;
+}
+header{
+	padding:$spacer*6 $spacer $spacer*3;
+}
+.hidden{
+	display:none !important;
+}
+main{
+	margin-bottom:$footer-height;
+	padding:$spacer;
+	.card,
+	.list-group,
+	.shadow{
+		box-shadow:		$box-shadow;
+		border-width:	0;
+	}
+}
+.modal-content{
+	color:$white;
+	.close{
+		color:$white;
+	}
+}
+nav{
+	&.page{
+		position:fixed;
+		right:0;
+		top:0;
+		z-index:3;
+		a{
+			border-radius:0;
+			padding:$spacer*.75;
+			i{
+				text-align:center;
+				width:$spacer*1.25;
+			}
+		}
+	}
+}
+%tab{
+	display:inline-block;
+	margin-right:$spacer/3;
+	vertical-align:top;
+}
+@for $i from 1 through 10{
+	// Bootstrap includes 50% and 100%
+	.tab-#{$i}{
+		@extend %tab;
+		width:#{$spacer * $i} !important;
+	}
+}

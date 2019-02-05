@@ -1,0 +1,11 @@
+Hello,
+
+{{{CONTENT}}}
+
+Regards,
+{{{SITE NAME}}}
+
+----------
+Copyright {{{YEAR}}} {{{SITE NAME}}}, All rights reserved.
+
+{{{COMPANY ADDRESS}}}

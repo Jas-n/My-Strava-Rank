@@ -1,0 +1,20 @@
+@import "app";
+#home{
+	.card{
+		background-position: center;
+		background-size:cover;
+		color:$primary !important;
+		font-size: $spacer*2;
+		padding:$spacer*10 0 0;
+		&.add{
+			background-image:url(../images/add.jpg);
+		}
+		&.athletes{
+			background-image:url(../images/athletes.jpg);
+		}
+		.title{
+			background:rgba(255,255,255,0.66);
+			padding:0 $spacer/2;
+		}
+	}
+}

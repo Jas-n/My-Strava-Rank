@@ -1,0 +1,18 @@
+<!-- config.xml reference: https://cordova.apache.org/docs/en/latest/config_ref/index.html -->
+<widget xmlns		="http://www.w3.org/ns/widgets"
+        xmlns:gap	="http://phonegap.com/ns/1.0"
+        id			="com.jas-n.home"
+        version		="0.0.0">
+    <name>My Strava Rank</name>
+    <description>Where do you rank?</description>
+    <author href="https://jas-n.com" email="jas-n@jas-n.com">Jas-n</author>
+	<!-- Core preferences -->
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="Orientation" value="portrait" />
+	<preference name="BackgroundColor" value="0xffFC4C02"/>
+	<!-- Android Preferences -->
+	<preference name="SplashScreen" value="splash.png"/>
+	<preference name="LoadingDialog" value="Spinning Wheels,Woo!"/>
+	<preference name="LoadingPageDialog" value="Changing Gear,Faster!"/>
+    <preference name="phonegap-version" value="cli-8.0.0" />
+</widget>

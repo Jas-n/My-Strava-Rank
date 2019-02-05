@@ -1,0 +1,19 @@
+#searching{
+	margin-bottom:15px;
+	overflow:hidden;
+}
+#searching div{
+	animation:searching linear 4s infinite;
+	background:#5dc145;
+	height:3px;
+	position:relative;
+	width:300px;
+}
+@-webkit-keyframes searching{
+	0%{left:-300px;}
+	100%{left:100%;}
+}
+@keyframes searching{
+	0%{left:-300px;}
+	100%{left:100%;}
+}

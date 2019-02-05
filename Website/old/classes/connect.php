@@ -1,0 +1,1 @@
+<?php $host="localhost";$user="Jas-n_strava";$pass="4Xdei@17";$name="Jas-n_strava";

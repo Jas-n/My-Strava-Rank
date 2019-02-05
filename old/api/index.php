@@ -1,1 +1,0 @@
-<?php header('Location: http://glowt.co.uk');
