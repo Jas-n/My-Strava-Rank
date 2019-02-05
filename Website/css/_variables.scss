@@ -1,8 +1,0 @@
-//@import "../../../GitHub/Global-Files/scss/formation";
-@import "../../- Software/- Core/css/formation";
-$spacer:	1rem;
-$orange:	#FC4C02;
-$warning:	$orange;
-@mixin transition($what:all){
-	transition:$what 150ms cubic-bezier(0.645, 0.045, 0.355, 1);
-}
