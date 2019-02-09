@@ -6,11 +6,12 @@
 /*!
  * App Core Styles
 */
-:root{
-	--border-color:$primary;
-}
 [data-load]{
 	cursor:pointer;
+}
+h1,
+h2{
+	color:$white;
 }
 .hero{
 	background-position:top;
@@ -21,53 +22,13 @@
 	width:100%;
 	z-index:-1;
 }
-.breadcrumb{
-	[data-load]{
-		color:var(--border-color);
-	}
-	.active{
-		cursor:default;
-	}
-}
 .card,
 .table{
-	background:#021F59;
-	border-top:3px solid var(--border-color) !important;
-	color:$white !important;
 	margin-bottom:$spacer/2;
 }
 .card{
 	display:block;
 	padding:$spacer/2;
-	&.icon{
-		text-align:center;
-		i{
-			display:block;
-			font-size:$spacer*2.5;
-			margin-bottom:$spacer*.25;
-			padding:$spacer*.25 0;
-		}
-	}
-	&.js-login{
-		background-position:center;
-		background-size:cover;
-		font-weight:500;
-		padding:$spacer*6 0;
-		&[data-id="1"]{
-			background-image: url('../images/charlotte.jpeg');
-			border-top:3px solid var(--border-color) !important; 
-			color:$purple !important;
-		}
-		&[data-id="2"]{
-			background-image: url('../images/jason.jpeg');
-			border-top:3px solid var(--border-color) !important;
-			color:$blue !important;
-		}
-		span{
-			background:rgba(255,255,255,.33);
-			padding:0 $spacer/2;
-		}
-	}
 }
 footer{
 	color:$gray-600;
@@ -95,11 +56,6 @@ footer{
 		}
 	}
 }
-h1,
-h2{
-	color:$white;
-	font-weight:normal;
-}
 header{
 	padding:$spacer*6 $spacer $spacer*3;
 }
@@ -111,42 +67,50 @@ main{
 	padding:$spacer;
 	.card,
 	.list-group,
+	.rank-number,
 	.shadow{
 		box-shadow:		$box-shadow;
 		border-width:	0;
 	}
 }
-.modal-content{
-	color:$white;
-	.close{
-		color:$white;
+.ranks{
+	h3{
+		margin-bottom:0;
 	}
-}
-nav{
-	&.page{
-		position:fixed;
-		right:0;
-		top:0;
-		z-index:3;
-		a{
-			border-radius:0;
-			padding:$spacer*.75;
-			i{
-				text-align:center;
-				width:$spacer*1.25;
+	.rank{
+		position: relative;
+		&-number{
+			border-bottom-left-radius: $spacer/4;
+			float:right;
+			font-size:$spacer*1.75;
+			position: absolute;
+			right:0;
+			text-align: center;
+			top:0;
+			width:42px;
+		}
+		&:nth-of-type(1){
+			.rank-number{
+				background-color:gold;
 			}
 		}
-	}
-}
-%tab{
-	display:inline-block;
-	margin-right:$spacer/3;
-	vertical-align:top;
-}
-@for $i from 1 through 10{
-	// Bootstrap includes 50% and 100%
-	.tab-#{$i}{
-		@extend %tab;
-		width:#{$spacer * $i} !important;
+		&:nth-of-type(2){
+			.rank-number{
+				background-color:silver;
+			}
+		}
+		&:nth-of-type(3){
+			.rank-number{
+				background-color:#cd7f32 ;
+			}
+		}
+		.progress{
+			border-radius: 0;
+			bottom:0;
+			height:$spacer/4;
+			left:0;
+			position: absolute;
+			width:100%;
+		}
 	}
 }

@@ -17361,12 +17361,13 @@ readers do not read off random characters that represent icons */
 /*!
  * App Core Styles
 */
-:root {
-  --border-color:$primary;
-}
-
 [data-load] {
   cursor: pointer;
+}
+
+h1,
+h2 {
+  color: #fff;
 }
 
 .hero {
@@ -17381,60 +17382,14 @@ readers do not read off random characters that represent icons */
   z-index: -1;
 }
 
-.breadcrumb [data-load] {
-  color: var(--border-color);
-}
-
-.breadcrumb .active {
-  cursor: default;
-}
-
 .card,
 .table {
-  background: #021F59;
-  border-top: 3px solid var(--border-color) !important;
-  color: #fff !important;
   margin-bottom: 0.5rem;
 }
 
 .card {
   display: block;
   padding: 0.5rem;
-}
-
-.card.icon {
-  text-align: center;
-}
-
-.card.icon i {
-  display: block;
-  font-size: 2.5rem;
-  margin-bottom: 0.25rem;
-  padding: 0.25rem 0;
-}
-
-.card.js-login {
-  background-position: center;
-  background-size: cover;
-  font-weight: 500;
-  padding: 6rem 0;
-}
-
-.card.js-login[data-id="1"] {
-  background-image: url("../images/charlotte.jpeg");
-  border-top: 3px solid var(--border-color) !important;
-  color: #6f42c1 !important;
-}
-
-.card.js-login[data-id="2"] {
-  background-image: url("../images/jason.jpeg");
-  border-top: 3px solid var(--border-color) !important;
-  color: #007bff !important;
-}
-
-.card.js-login span {
-  background: rgba(255, 255, 255, 0.33);
-  padding: 0 0.5rem;
 }
 
 footer {
@@ -17466,12 +17421,6 @@ footer .col i {
   font-size: 2rem;
 }
 
-h1,
-h2 {
-  color: #fff;
-  font-weight: normal;
-}
-
 header {
   padding: 6rem 1rem 3rem;
 }
@@ -17487,80 +17436,50 @@ main {
 
 main .card,
 main .list-group,
+main .rank-number,
 main .shadow {
   -webkit-box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
           box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
   border-width: 0;
 }
 
-.modal-content {
-  color: #fff;
+.ranks h3 {
+  margin-bottom: 0;
 }
 
-.modal-content .close {
-  color: #fff;
+.ranks .rank {
+  position: relative;
 }
 
-nav.page {
-  position: fixed;
+.ranks .rank-number {
+  border-bottom-left-radius: 0.25rem;
+  float: right;
+  font-size: 1.75rem;
+  position: absolute;
   right: 0;
-  top: 0;
-  z-index: 3;
-}
-
-nav.page a {
-  border-radius: 0;
-  padding: 0.75rem;
-}
-
-nav.page a i {
   text-align: center;
-  width: 1.25rem;
+  top: 0;
+  width: 42px;
 }
 
-.tab-1, .tab-2, .tab-3, .tab-4, .tab-5, .tab-6, .tab-7, .tab-8, .tab-9, .tab-10 {
-  display: inline-block;
-  margin-right: 0.33333rem;
-  vertical-align: top;
+.ranks .rank:nth-of-type(1) .rank-number {
+  background-color: gold;
 }
 
-.tab-1 {
-  width: 1rem !important;
+.ranks .rank:nth-of-type(2) .rank-number {
+  background-color: silver;
 }
 
-.tab-2 {
-  width: 2rem !important;
+.ranks .rank:nth-of-type(3) .rank-number {
+  background-color: #cd7f32;
 }
 
-.tab-3 {
-  width: 3rem !important;
-}
-
-.tab-4 {
-  width: 4rem !important;
-}
-
-.tab-5 {
-  width: 5rem !important;
-}
-
-.tab-6 {
-  width: 6rem !important;
-}
-
-.tab-7 {
-  width: 7rem !important;
-}
-
-.tab-8 {
-  width: 8rem !important;
-}
-
-.tab-9 {
-  width: 9rem !important;
-}
-
-.tab-10 {
-  width: 10rem !important;
+.ranks .rank .progress {
+  border-radius: 0;
+  bottom: 0;
+  height: 0.25rem;
+  left: 0;
+  position: absolute;
+  width: 100%;
 }
 /*# sourceMappingURL=core.css.map */
