@@ -3,7 +3,7 @@
 <widget xmlns		="http://www.w3.org/ns/widgets"
         xmlns:gap	="http://phonegap.com/ns/1.0"
         id			="com.mystravarank.app"
-        version		="0.2.0">
+        version		="0.2.1">
     <name>My Strava Rank</name>
     <description>Where do you rank?</description>
     <author href="https://jas-n.com" email="jas-n@jas-n.com">Jas-n</author>
@@ -16,4 +16,7 @@
 	<preference name="LoadingDialog" value="Spinning Wheels,Woo!"/>
 	<preference name="LoadingPageDialog" value="Changing Gear,Faster!"/>
     <preference name="phonegap-version" value="cli-8.0.0" />
+	<!-- Plugins -->
+	<plugin name="cordova-plugin-whitelist"	spec="~1.3.3" />
+    <access origin="https://api.mystravarank.com" />
 </widget>
