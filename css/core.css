@@ -17365,11 +17365,6 @@ readers do not read off random characters that represent icons */
   cursor: pointer;
 }
 
-h1,
-h2 {
-  color: #fff;
-}
-
 .hero {
   background-position: top;
   -o-object-fit: cover;
@@ -17423,6 +17418,10 @@ footer .col i {
 
 header {
   padding: 6rem 1rem 3rem;
+}
+
+header h1 {
+  color: #fff;
 }
 
 .hidden {

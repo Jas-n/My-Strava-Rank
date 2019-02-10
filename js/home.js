@@ -1,6 +1,7 @@
 var home={
 	initiated:	false,
-	name:'My Strava Rank',
+	name:'I\'m At One',
 	init:function(){
+		$('title,h1').text(home.name);
 	}
 };

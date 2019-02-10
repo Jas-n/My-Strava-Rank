@@ -1,10 +1,10 @@
-var msr={
+var core={
 	id:0,
 	is_app:false,
 	loaded:[],
 	user:0,
 	init:function(){
-		if(msr.is_app){
+		if(core.is_app){
 			this.app_init();
 		}
 		this.watch_links();
@@ -33,20 +33,20 @@ var msr={
 	},
 	load_partial:function(partial,id){
 		if(id){
-			msr.id=id;
-			$('main').attr('data-id',msr.id);
+			core.id=id;
+			$('main').attr('data-id',core.id);
 		}else{
-			msr.id=0;
-			$('main').attr('data-id',msr.id);
+			core.id=0;
+			$('main').attr('data-id',core.id);
 		}
 		$('main').load('partials/'+partial+'.html',function(){
 			$('.breadcrumb').remove();
 			$('main').attr('id',partial);
 			$('.hero').attr('src','images/'+partial+'.jpg');
-			if(msr.loaded.indexOf(partial)===-1){
+			if(core.loaded.indexOf(partial)===-1){
 				$('head').append('<link rel="stylesheet" href="css/'+partial+'.css">');
 				$('body').append('<script src="js/'+partial+'.js"></script>');
-				msr.loaded.push(partial);
+				core.loaded.push(partial);
 			}
 			if($('footer .col[data-load="'+partial+'"]').length){
 				$('footer .col').removeClass('active');
@@ -78,13 +78,13 @@ var msr={
 	watch_links:function(){
 		this.load_partial('home');
 		$('body').on('click','[data-load]',function(){
-			msr.load_partial($(this).data('load'),$(this).data('id'));
+			core.load_partial($(this).data('load'),$(this).data('id'));
 		});
 	}
 };
 if(typeof cordova!=='undefined'){
-	msr.is_app=true;
-	document.addEventListener('deviceready',msr.init,false);
+	core.is_app=true;
+	document.addEventListener('deviceready',core.init,false);
 }else{
-	msr.init();
+	core.init();
 }
