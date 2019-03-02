@@ -11,6 +11,7 @@ if(in_array($hour,array(0,6,12,18))){
 		foreach($athletes_ as $athlete){
 			$strava->setAccessToken($athlete['access_token']);
 			$data=$strava->get('athletes/'.$athlete['strava_id'].'/stats');
+			file_put_contents(ROOT.'CRONS/'.$athlete['strava_id'].'.json',json_encode($athlete));
 			foreach(array('ride','run','swim') as $activity){
 				if($activity_id=$db->get_value(
 					"SELECT `id`

@@ -299,3 +299,6 @@ function to_noun($word){
 			return 'swimming';
 	}
 }
+function software_version(){
+	return '1';
+}

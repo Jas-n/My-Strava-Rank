@@ -13,7 +13,7 @@ var athlete={
 	got:function(json){
 		var data=json.data;
 		athlete.name=data.username?data.username:data.first_name+' '+data.last_name[0];
-		athlete.small=data.last_activity;
+		athlete.small=data.last_activity.formatted?data.last_activity.formatted:data.updated.formatted;
 		core.set_header(athlete);
 	}
 };

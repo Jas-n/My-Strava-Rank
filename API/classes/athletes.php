@@ -2,7 +2,10 @@
 	public function get($id=null){
 		global $db;
 		if($id){
-			return $this->get_athletes(array('ids'=>$id));
+			$athletes=$this->get_athletes(array('ids'=>$id));
+			if($athletes['count']){
+				return $athletes['data'][0];
+			}
 		}
 		return $this->get_athletes();
 	}
@@ -51,11 +54,7 @@
 			$id
 		)){
 			$this->normalise_athlete($athlete);
-			$athlete['ranks']=array(
-				'all'	=>$db->get_value("SELECT COUNT(1) FROM `athletes` WHERE `points` >=?",$athlete['points']),
-				'gender'=>$db->get_value("SELECT COUNT(1) FROM `athletes` WHERE `points` >=? AND `sex`=?",array($athlete['points'],$athlete['sex'])),
-				'town'	=>$db->get_value("SELECT COUNT(1) FROM `athletes` WHERE `points` >=? AND `town_id`=?",array($athlete['points'],$athlete['town_id']))
-			);
+			
 			asort($athlete['ranks']);
 			$athlete['activities']=$this->get_activities($athlete['id']);
 			$athlete['clubs']=$this->get_athlete_clubs($athlete['id']);
@@ -112,12 +111,15 @@
 		if($athletes=$db->query(
 			"SELECT
 				`athletes`.*,
-				(SELECT `name` FROM `ranks` WHERE `points`<`athletes`.`points` ORDER BY `id` DESC LIMIT 1) as `rank`,
+				(SELECT `name`		FROM `ranks`			WHERE `points`<`athletes`.`points` ORDER BY `id` DESC LIMIT 1)					as `gamification_rank`,
+				(SELECT COUNT(1)	FROM `athletes` as `aa` WHERE `aa`.`points` >=`athletes`.`points`)										as `ranks_all`,
+				(SELECT COUNT(1)	FROM `athletes` as `sa` WHERE `sa`.`points` >=`athletes`.`points` AND `sex`=`athletes`.`sex`)			as `ranks_sex`,
+				(SELECT COUNT(1)	FROM `athletes` as `ta` WHERE `ta`.`points` >=`athletes`.`points` AND `town_id`=`athletes`.`town_id`)	as `ranks_town`,
 				(
 					SELECT `points` FROM `ranks` WHERE `id`=(
 						IF(
-							(SELECT `id` FROM `ranks` WHERE `points`>`athletes`.`points` ORDER BY `id` DESC LIMIT 1),
-							(SELECT `id` FROM `ranks` WHERE `points`>`athletes`.`points` ORDER BY `id` DESC LIMIT 1),
+							(SELECT `id` FROM `ranks` WHERE `points`>`athletes`.`points` ORDER BY `id` ASC LIMIT 1),
+							(SELECT `id` FROM `ranks` WHERE `points`>`athletes`.`points` ORDER BY `id` ASC LIMIT 1),
 							(SELECT `id` FROM `ranks` ORDER BY `id` DESC LIMIT 1)
 						)
 					)
@@ -130,6 +132,23 @@
 		)){
 			foreach($athletes as &$athlete){
 				$athlete['clubs']=$this->get_athlete_clubs($athlete['id']);
+				$athlete['gamification']=array(
+					'rank'	=>$athlete['gamification_rank'],
+					'points'=>$athlete['points'],
+					'next'	=>$athlete['next_rank_points'],
+					'percent'=>round($athlete['points']/$athlete['next_rank_points']*100,1)
+				);
+				foreach(array('added','last_activity','strava_join','updated') as $field){
+					$athlete[$field]=array(
+						'formatted'	=>sql_datetime($athlete[$field]),
+						'raw'		=>$athlete[$field]
+					);
+				}
+				$athlete['ranks']=array(
+					'all'	=>$athlete['ranks_all'],
+					'sex'	=>$athlete['ranks_sex'],
+					'town'	=>$athlete['ranks_town'],
+				);
 				if($athlete['sex']=='M'){
 					$athlete['gender']='Male';
 				}elseif($athlete['sex']=='F'){
@@ -137,6 +156,14 @@
 				}else{
 					$athlete['gender']='';
 				}
+				unset(
+					$athlete['gamification_rank'],
+					$athlete['points'],
+					$athlete['ranks_all'],
+					$athlete['ranks_sex'],
+					$athlete['ranks_town'],
+					$athlete['next_rank_points']
+				);
 			}
 		}
 		return array(

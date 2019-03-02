@@ -14,11 +14,11 @@ var athletes={
 				'<div class="rank-number">'+(i+1)+'</div>'+
 				'<h3>'+(athlete.username?athlete.username:athlete.first_name+' '+athlete.last_name[0])+'</h3>'+
 				'<div class="row">'+
-					'<div class="col-6">'+php.number_format(athlete.points)+'</div>'+
-					'<div class="col-6">'+athlete.rank+'</div>'+
+					'<div class="col-6">'+php.number_format(athlete.gamification.points)+'</div>'+
+					'<div class="col-6">'+athlete.gamification.rank+'</div>'+
 				'</div>'+
 				'<div class="progress">'+
-					'<div class="progress-bar" style="width:'+athlete.rank_percent+'%" role="progressbar" aria-valuenow="'+athlete.points+'" aria-valuemin="0" aria-valuemax="'+athlete.next_rank_points+'"></div>'+
+					'<div class="progress-bar" style="width:'+athlete.gamification.percent+'%" role="progressbar" aria-valuenow="'+athlete.gamification.points+'" aria-valuemin="0" aria-valuemax="'+athlete.gamification.next+'"></div>'+
 				'</div>'+
 			'</div>');
 		}
