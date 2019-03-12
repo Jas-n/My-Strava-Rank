@@ -16,6 +16,7 @@ var athlete={
 		athlete.small=data.last_activity.formatted?data.last_activity.formatted:data.updated.formatted;
 		core.set_header(athlete);
 		var map={
+			activity_count:	data.activity_count,
 			athlete_points:	php.number_format(data.gamification.points),
 			athlete_rank:	data.gamification.rank,
 			first_name:		data.first_name,
