@@ -1,10 +1,49 @@
 <div class="card">
 	<h2>Biography</h2>
-	<p>Hi, my name's <strong data-athlete="first_name"></strong>, you'll find me as <strong data-athlete="username"></strong> on My Strava Rank. I first joined Strava on the <strong data-athlete="strava_join"></strong> and since then have recorded <strong><span data-athlete="activity_count"></span> activities</strong> that have taken me over <strong><span data-athlete="activity_hours"></span> hours</strong> to achieve distances of over <strong><span data-athlete="activity_miles"></span> miles</strong>, heights of over <strong><span data-athlete="activity_height"></span> miles</strong>.</p>
+	<p>Hi, my name's <strong data-athlete="first_name"></strong>, you'll find me as <strong data-athlete="username"></strong> on My Strava Rank. I first joined Strava on the <strong data-athlete="strava_join"></strong> and since then have recorded <strong><span data-athlete="activity_count"></span> activities</strong> that have taken me over <strong><span data-athlete="activity_hours"></span> hours</strong> to achieve distances of over <strong><span data-athlete="activity_miles"></span> miles</strong> and heights of over <strong><span data-athlete="activity_height"></span> miles</strong>.</p>
 	<p>I joined My Strava Rank <strong data-athlete="msr_join_later"></strong> later on the <strong data-athlete="msr_join"></strong> and have since amassed <strong><span data-athlete="athlete_points"></span> points</strong> which has gotten me to <strong>rank <span data-athlete="athlete_rank"></span></strong>.</p>
-	<p>My favourite Strava sporting activity is <strong data-athlete="athlete_favourite_activity"></strong>, as I've recorded them <strong data-athlete="athlete_favourite_count"></strong> times.</p>
+	<p>My favourite Strava sporting activity is <strong data-athlete="athlete_favourite_activity"></strong>, as I've recorded <strong data-athlete="athlete_favourite_count"></strong> of them.</p>
 </div>
 <div class="card">
 	<h2>Distance</h2>
-	<p>Since I first joined Strava on the <strong data-athlete="strava_join"></strong> I've travelled over <strong><span data-athlete="distance_total_miles"></span> miles</strong>. I'm currently travelling the equivalent of <strong data-athlete="distance_equivalent"></strong> and I'm over <strong><span data-athlete="distance_complete"></span>%</strong> of the way there.</p>
+	<p>Since I first joined Strava on the <strong data-athlete="strava_join"></strong> I've travelled over <strong><span data-athlete="activity_miles"></span> miles</strong>. I'm currently travelling the equivalent of <strong data-athlete="distance_equivalent"></strong> and I'm over <strong><span data-athlete="distance_complete"></span>%</strong> of the way there.</p>
+</div>
+<div class="card">
+	<h2>Altitude</h2>
+	<p>Since I first joined Strava on the <strong><?=date('jS \of F Y',strtotime($athlete->strava_join))?></strong> I've ascended over <strong><?=number_format($athlete->total_elevation,1)?> miles</strong>. I'm currently ascending the equivelant of <strong><?=$elevation['like']['to_text']?></strong> and I'm over <strong><?=number_format($elevation['like']['complete'])?>%</strong> of the way there.</p>
+</div>
+<div class="card">
+	<h2>Clubs</h2>
+	<p>Since I first joined Strava on the <strong><?=date('jS \of F Y',strtotime($athlete->strava_join))?></strong> I've joined <strong><?=inflect::pluralize_if(sizeof($athlete->clubs),'club')?></strong>.</p>
+</div>
+<div class="card">
+	<h2>Ranks</h2>
+	<div class="cols-md-2">
+		<?php if($athlete->ranks){
+			foreach($athlete->ranks as $name=>$ranks){ ?>
+				<div class="rank">
+					<h3><?=$name?></h3>
+					<table class="ranks table table-sm">
+						<thead>
+							<tr>
+								<th>Rank</th>
+								<th>Name</th>
+								<th>Distance</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach($ranks as $i=>$rank){
+								$is_me=$athlete->hex_id==$rank['hex_id']; ?>
+								<tr<?=$is_me?' class="me"':''?>>
+									<td><?=number_format($rank['rank'])?></td>
+									<td><?=(!$is_me?'<a href="/athlete/'.$rank['hex_id'].'" alt="'.$rank['name'].'">':'').$rank['name'].(!$is_me?'</a>':'')?></a></td>
+									<td><?=number_format($rank['count'])?></td>
+								</tr>
+							<?php } ?>
+						</tbody>
+					</table>
+				</div>
+			<?php }
+		} ?>
+	</div>
 </div>
