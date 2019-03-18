@@ -3,7 +3,7 @@
 <widget xmlns		="http://www.w3.org/ns/widgets"
         xmlns:gap	="http://phonegap.com/ns/1.0"
         id			="com.mystravarank.app"
-        version		="0.7.1">
+        version		="0.7.2">
     <name>I'm At One</name>
     <description>Where do you rank?</description>
     <author href="https://jas-n.com" email="jas-n@jas-n.com">Jas-n</author>

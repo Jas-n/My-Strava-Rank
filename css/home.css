@@ -1,21 +1,2 @@
-#home .card {
-  background-position: center;
-  background-size: cover;
-  color: #FC4C02 !important;
-  font-size: 2rem;
-  padding: 10rem 0 0;
-}
-
-#home .card.add {
-  background-image: url(../images/add.jpg);
-}
-
-#home .card.athletes {
-  background-image: url(../images/athletes.jpg);
-}
-
-#home .card .title {
-  background: rgba(255, 255, 255, 0.66);
-  padding: 0 0.5rem;
-}
+#home .card{background-position:center;background-size:cover;color:#FC4C02 !important;font-size:2rem;padding:10rem 0 0}#home .card.add{background-image:url(../images/add.jpg)}#home .card.athletes{background-image:url(../images/athletes.jpg)}#home .card .title{background:rgba(255,255,255,0.66);padding:0 .5rem}
 /*# sourceMappingURL=home.css.map */
